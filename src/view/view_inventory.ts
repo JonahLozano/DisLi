@@ -37,13 +37,20 @@ export = class create_inventory_view {
     });
   }
 
-  addItem(id: string, serial_number: string, status: string) {
+  addItem(
+    id: string,
+    serial_number: string,
+    status: string,
+    brand: string,
+    model: string,
+    code_name: string
+  ) {
     this.data.content[1].content.push({
       id: id,
       elementType: "blockHeading",
       heading: serial_number,
       headingLevel: 2,
-      description: `<span style='color:red;font-size:1.0025rem'>${status}</span><span style='font-size:1.0025rem'> - ${ele.brand} ${ele.model}</span><br></br>${ele.code_name}`,
+      description: `<span style='color:red;font-size:1.0025rem'>${status}</span><span style='font-size:1.0025rem'> - ${brand} ${model}</span><br></br>${code_name}`,
       buttons: [
         {
           elementType: "linkButton",
