@@ -18,7 +18,14 @@ const view_inventory = async (_req: Request, res: Response) => {
     item_details.forEach((ele) => {
       const anID = replaceAll(ele.serial_number, "-", "");
 
-      inv.addItem(anID, ele.serial_number, ele.status);
+      inv.addItem(
+        anID,
+        ele.serial_number,
+        ele.status,
+        ele.brand,
+        ele.model,
+        ele.code_name
+      );
 
       inv.addDivider();
     });
