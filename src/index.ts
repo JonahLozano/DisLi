@@ -14,7 +14,7 @@ app.use(express.urlencoded({ extended: true }));
 routes(app);
 
 app.get("/", (_, res) => {
-  res.send("SUP");
+  res.send("SUP!!");
 });
 
 app.get("/dev/wipe-database", async (_, res) => {
