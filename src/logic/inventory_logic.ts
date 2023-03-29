@@ -3,6 +3,7 @@ import { Item } from "../entity/item";
 import { EntityNotFoundError, QueryFailedError } from "typeorm";
 import { replaceAll } from "../utils/replaceAll";
 import create_inventory_view from "../view/view_inventory";
+import create_inventory_item_view from "../view/view_inventory_item";
 
 const view_inventory = async (_req: Request, res: Response) => {
   try {
@@ -43,7 +44,17 @@ const view_item = async (req: Request, res: Response) => {
 
     const item_details = await Item.findOneByOrFail({ serial_number });
 
-    res.status(200).json(item_details);
+    let item = new create_inventory_item_view();
+
+    item.addItem(
+      item_details.serial_number,
+      item_details.status,
+      item_details.brand,
+      item_details.model,
+      item_details.code_name
+    );
+
+    res.status(200).json(item);
   } catch (err) {
     console.log(err.stack);
     if (err instanceof EntityNotFoundError) {
