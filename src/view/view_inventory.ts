@@ -55,11 +55,11 @@ export = class create_inventory_view {
         {
           elementType: "linkButton",
           title: "information",
-          icon: "notification_information",
-          iconPosition: "iconOnly",
+          accessoryIcon: "notification_information",
           actionStyle: "normal",
+          accessoryIconPosition: "iconOnly",
           link: {
-            relativePath: " ",
+            relativePath: `/${serial_number}`,
           },
         },
         {
