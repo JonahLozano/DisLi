@@ -54,7 +54,7 @@ const view_item = async (req: Request, res: Response) => {
       item_details.code_name
     );
 
-    res.status(200).json(item);
+    res.status(200).json(item.getData());
   } catch (err) {
     console.log(err.stack);
     if (err instanceof EntityNotFoundError) {
