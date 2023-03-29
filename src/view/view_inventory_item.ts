@@ -27,7 +27,7 @@ export = class create_inventory_item_view {
     model: string,
     code_name: string
   ) {
-    this.data.content[1].content.push(
+    this.data.content.push(
       {
         elementType: "blockHeading",
         heading: `${brand} ${model}`,
