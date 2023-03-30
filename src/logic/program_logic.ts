@@ -90,6 +90,9 @@ const end_program = async (req: Request, res: Response) => {
     program_details!.deprecated = deprecated;
     await Program.update({ id }, program_details!);
 
+    console.log(program_details);
+    console.log(deprecated);
+
     res.status(200).json(program_details);
   } catch (err) {
     console.log(err.stack);
