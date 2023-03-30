@@ -49,8 +49,24 @@ const delete_program = async (req: Request, res: Response) => {
   }
 };
 
+const end_program = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.body;
+    const program_details = await Program.findOneBy({ id });
+
+    program_details!.deprecated = true;
+    await Program.update({ id }, program_details!);
+
+    res.status(200).json(program_details);
+  } catch (err) {
+    console.log(err.stack);
+    res.status(404).send("ERROR");
+  }
+};
+
 export = {
   view_programs,
   add_program,
   delete_program,
+  end_program,
 };
