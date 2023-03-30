@@ -52,18 +52,18 @@ export = class create_program_view {
           iconPosition: "iconOnly",
           confirmationMessage: "Are you sure you want to delete this?",
           events: [
-            // {
-            //   eventName: "click",
-            //   action: "ajaxUpdate",
-            //   useRelativePathToUpdate: true,
-            //   targetId: "00002",
-            //   ajaxRelativePath: "/",
-            //   requestMethod: "put",
-            //   postData: {
-            //     serial_number: "00002",
-            //     deprecated: true,
-            //   },
-            // },
+            {
+              eventName: "click",
+              action: "ajaxUpdate",
+              useRelativePathToUpdate: true,
+              targetId: new_id,
+              ajaxRelativePath: "/",
+              requestMethod: "put",
+              postData: {
+                serial_number: id,
+                deprecated: true,
+              },
+            },
           ],
         },
       ],
