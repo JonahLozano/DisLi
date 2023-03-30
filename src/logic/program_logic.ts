@@ -11,6 +11,7 @@ const view_programs = async (_req: Request, res: Response) => {
       id: string;
       code_name: string;
       availiable_to: [string];
+      deprecated: boolean;
     }> = [];
 
     item_details.forEach((ele) => {
@@ -27,6 +28,7 @@ const view_programs = async (_req: Request, res: Response) => {
             id: ele.id,
             code_name: ele.code_name,
             availiable_to: [ele.availiable_to],
+            deprecated: ele.deprecated,
           });
     });
 
@@ -34,7 +36,7 @@ const view_programs = async (_req: Request, res: Response) => {
 
     if (reduced_item_list)
       reduced_item_list.forEach((ele) => {
-        view.addData(ele.id, ele.code_name, ele.availiable_to);
+        view.addData(ele.id, ele.code_name, ele.availiable_to, ele.deprecated);
       });
 
     res.status(200).json(view.getData());
@@ -81,7 +83,6 @@ const delete_program = async (req: Request, res: Response) => {
 };
 
 const end_program = async (req: Request, res: Response) => {
-  console.log("end_program");
   try {
     const { id, deprecated } = req.body;
     const program_details = await Program.findOneBy({ id });

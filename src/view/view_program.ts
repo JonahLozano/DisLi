@@ -33,7 +33,12 @@ export = class create_program_view {
     return this.data;
   }
 
-  addData(id: string, program_name: string, available_to: [string]) {
+  addData(
+    id: string,
+    program_name: string,
+    available_to: [string],
+    deprecated: boolean
+  ) {
     const new_id = id.replace(/-/g, "");
 
     this.data.content.push({
@@ -41,7 +46,7 @@ export = class create_program_view {
       elementType: "blockHeading",
       heading: program_name,
       headingLevel: 2,
-      description: `<span style='font-size:1.0025rem'>Availiable To: ${available_to}</span>`,
+      description: `<span style='font-size:1.0025rem'>Availiable To: ${available_to}</span><br></br><span style='font-size:1.0025rem'>Deprecated: ${deprecated}</span>`,
       buttons: [
         {
           elementType: "formButton",
