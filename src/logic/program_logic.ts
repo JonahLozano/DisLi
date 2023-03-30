@@ -84,11 +84,13 @@ const delete_program = async (req: Request, res: Response) => {
 
 const end_program = async (req: Request, res: Response) => {
   try {
-    const { id, deprecated } = req.body;
-    const program_details = await Program.findOneBy({ id });
+    const { id, code_name, deprecated } = req.body;
+    const program_details = await Program.findBy({ code_name });
 
-    program_details!.deprecated = deprecated;
-    await Program.update({ id }, program_details!);
+    program_details!.forEach((ele) => {
+      ele.deprecated = deprecated;
+      Program.update({ id }, ele);
+    });
 
     console.log(program_details);
     console.log(deprecated);
