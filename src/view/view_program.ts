@@ -65,7 +65,8 @@ export = class create_program_view {
               ajaxRelativePath: "/",
               requestMethod: "put",
               postData: {
-                serial_number: id,
+                id: id,
+                code_name: program_name,
                 deprecated: true,
               },
             },
