@@ -34,8 +34,10 @@ export = class create_program_view {
   }
 
   addData(id: string, program_name: string, available_to: [string]) {
+    const new_id = id.replace(/-/g, "");
+
     this.data.content.push({
-      id: id,
+      id: new_id,
       elementType: "blockHeading",
       heading: program_name,
       headingLevel: 2,
