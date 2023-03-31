@@ -6,6 +6,7 @@ services:
       - "80:4000"
     volumes:
       - ./src:/app/src
+      - ./logs:/app/logs
     environment:
       - CHOKIDAR_USEPOLLING=true
     restart: always
