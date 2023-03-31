@@ -1,15 +1,13 @@
-name: Node Continuous Integration
+name: My Workflow
+on: [push]
 
-on:
-  push:
-    branches:
-      - main
-  jobs:
-    test_pull_request:
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v2
-            - name: DC UP
-              run: docker-compose up -d
-            - name: Run tests
-              run: docker-compose run --rm express-app npm test
+jobs:
+  my-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Run tests
+        run: |
+          docker-compose up -d
+          docker-compose run --rm express-app npm test
