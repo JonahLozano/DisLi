@@ -26,6 +26,18 @@ export = class create_profile_checkout_view {
                                 "AT&T Nighthawk MR1100": "AT&T Nighthawk MR1100"
                             },
                             "fullWidth": true
+                        },
+                        {
+                            "elementType": "formInputDate",
+                            "name": "date",
+                            "label": "Date",
+                            "max": "2024-12-31",
+                            "min": "2020-01-01"
+                        },
+                        {
+                            "elementType": "formInputTime",
+                            "name": "time",
+                            "label": "Time"
                         }
                     ],
                     "buttons": [
