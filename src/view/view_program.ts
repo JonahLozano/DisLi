@@ -75,6 +75,8 @@ export = class create_program_view {
       ],
     });
 
+    // TODO: Add a add program page
+
     this.data.content.push({
       elementType: "divider",
     });

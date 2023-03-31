@@ -20,6 +20,10 @@ export = class create_inventory_item_view {
     });
   }
 
+  // TODO: Add a modify item function
+
+  // TODO: Add user info if item belongs to user
+
   addItem(
     serial_number: string,
     status: string,
