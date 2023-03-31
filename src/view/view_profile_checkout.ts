@@ -7,7 +7,42 @@ export = class create_profile_checkout_view {
             },
             "contentContainerWidth": "narrow",
             "content": [
-                
+                {
+                    "heading": "Please Select a Device for Checkout",
+                    "elementType": "blockHeading",
+                    "headingLevel": 1,
+                    "headingTextAlignment": "center"
+                },
+                {
+                    "elementType": "form",
+                    "id": "segmented",
+                    "items": [
+                        {
+                            "elementType": "formInputSegmented",
+                            "name": "segmented3",
+                            "options": {
+                                "Apple IPad Air 4": "Apple IPad Air 4",
+                                "Apple IPad Gen 5": "Apple IPad Gen 5",
+                                "AT&T Nighthawk MR1100": "AT&T Nighthawk MR1100"
+                            },
+                            "fullWidth": true
+                        }
+                    ],
+                    "buttons": [
+                        {
+                            "elementType": "formButton",
+                            "name": "s1_submit",
+                            "title": "Submit",
+                            "buttonType": "submit",
+                            "actionStyle": "constructive",
+                            "minWidth": "8rem"
+                        }
+                    ],
+                    "trackDirtyStateButtonNames": [
+                        "s1_submit"
+                    ],
+                    "buttonsHorizontalAlignment": "center"
+                }
             ]
         }
     }
@@ -16,6 +51,6 @@ export = class create_profile_checkout_view {
       return this.data;
     }
 
-    
+
 };
   
