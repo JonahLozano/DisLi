@@ -10,4 +10,6 @@ module.exports = {
       diagnostics: false,
     },
   },
+  verbose: true,
+  forceExit: true,
 };
