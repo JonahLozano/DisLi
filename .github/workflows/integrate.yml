@@ -1,0 +1,15 @@
+name: Node Continuous Integration
+
+on:
+  push:
+    branches:
+      - main
+  jobs:
+    test_pull_request:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+            - name: DC UP
+              run: docker-compose up -d
+            - name: Run tests
+              run: docker-compose run --rm express-app npm test
