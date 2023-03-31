@@ -753,6 +753,6 @@ describe("Inventory tests", () => {
       ],
     };
 
-    expect(response.body).toStrictEqual(1);
+    expect(response.body).toStrictEqual(data);
   });
 });
