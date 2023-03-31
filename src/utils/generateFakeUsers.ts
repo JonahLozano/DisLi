@@ -1,5 +1,6 @@
 import { Person } from "../entity/person";
 import { UserRole } from "./UserRoles";
+import { logger } from "../index";
 
 export const generateFakeUsers = async () => {
   const alice = Person.create({
@@ -32,16 +33,16 @@ export const generateFakeUsers = async () => {
   try {
     await Person.insert(alice);
   } catch (err) {
-    console.log("Alison already exists in db");
+    logger.info(`Alison already exists in db`);
   }
   try {
     await Person.insert(bob);
   } catch (err) {
-    console.log(`Bob already exists in db`);
+    logger.info(`Bob already exists in db`);
   }
   try {
     await Person.insert(charlie);
   } catch (err) {
-    console.log(`Charlie already exists in db`);
+    logger.info(`Charlie already exists in db`);
   }
 };

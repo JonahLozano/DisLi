@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { Help } from "../entity/help";
 import { Person } from "../entity/person";
 import { EntityNotFoundError, QueryFailedError } from "typeorm";
+import { logger } from "../index";
 
 const view_help_queue = async (_req: Request, res: Response) => {
   try {
@@ -9,7 +10,7 @@ const view_help_queue = async (_req: Request, res: Response) => {
 
     res.status(200).json(item_details);
   } catch (err) {
-    console.log(err.stack);
+    logger.error(err);
     res.status(404).send("ERROR");
   }
 };
@@ -22,7 +23,7 @@ const view_help_request = async (req: Request, res: Response) => {
 
     res.status(200).json(item_details);
   } catch (err) {
-    console.log(err.stack);
+    logger.error(err);
     if (err instanceof EntityNotFoundError) {
       res.status(404).send(err.message);
     } else {
@@ -41,7 +42,7 @@ const view_help_request_authored = async (req: Request, res: Response) => {
 
     res.status(200).json(help_requests_authored);
   } catch (err) {
-    console.log(err.stack);
+    logger.error(err);
     res.status(404).send("ERROR");
   }
 };
@@ -62,7 +63,7 @@ const request_help = async (req: Request, res: Response) => {
 
     res.status(201).json(new_device);
   } catch (err) {
-    console.log(err.stack);
+    logger.error(err);
     if (err instanceof QueryFailedError) {
       res.status(404).send(err.message);
     } else {
@@ -83,7 +84,7 @@ const close_help_request = async (req: Request, res: Response) => {
 
     res.status(201).json(existing_help_request);
   } catch (err) {
-    console.log(err.stack);
+    logger.error(err);
     if (err instanceof EntityNotFoundError) {
       res.status(404).send(err.message);
     } else if (err instanceof QueryFailedError) {

@@ -4,6 +4,7 @@ import { EntityNotFoundError, QueryFailedError } from "typeorm";
 import { replaceAll } from "../utils/replaceAll";
 import create_inventory_view from "../view/view_inventory";
 import create_inventory_item_view from "../view/view_inventory_item";
+import { logger } from "../index";
 
 const view_inventory = async (_req: Request, res: Response) => {
   try {
@@ -33,7 +34,7 @@ const view_inventory = async (_req: Request, res: Response) => {
 
     res.status(200).json(inv.getData());
   } catch (err) {
-    console.log(err.stack);
+    logger.error(err);
     res.status(404).send("ERROR");
   }
 };
@@ -56,7 +57,7 @@ const view_item = async (req: Request, res: Response) => {
 
     res.status(200).json(item.getData());
   } catch (err) {
-    console.log(err.stack);
+    logger.error(err);
     if (err instanceof EntityNotFoundError) {
       res.status(404).send(err.message);
     } else {
@@ -145,7 +146,7 @@ const add_item = async (req: Request, res: Response) => {
 
     res.status(201).json(data);
   } catch (err) {
-    console.log(err.stack);
+    logger.error(err);
     if (err instanceof QueryFailedError) {
       data.content[1].items[0].description =
         "<span style='color:red;'>Item already exists in inventory</span>";
@@ -276,7 +277,7 @@ const modify_item = async (req: Request, res: Response) => {
       res.status(201).json(existing_item);
     }
   } catch (err) {
-    console.log(err.stack);
+    logger.error(err);
     if (err instanceof QueryFailedError) {
       res.status(404).send(err.message);
     } else {
@@ -286,16 +287,14 @@ const modify_item = async (req: Request, res: Response) => {
 };
 
 const add_item_page = async (_req: Request, res: Response) => {
-  const raw_LOB = await Item.createQueryBuilder("Item")
-    .select("Item.brand")
-    .distinct(true)
-    .getRawMany();
+  // const raw_LOB = await Item.createQueryBuilder("Item")
+  //   .select("Item.brand")
+  //   .distinct(true)
+  //   .getRawMany();
 
-  const list_of_brands = raw_LOB
-    .map((ele) => ele.Item_brand)
-    .filter((ele) => ele !== "");
-
-  console.log(list_of_brands);
+  // const list_of_brands = raw_LOB
+  //   .map((ele) => ele.Item_brand)
+  //   .filter((ele) => ele !== "");
 
   const data = {
     metadata: {

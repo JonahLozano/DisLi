@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { QueryFailedError } from "typeorm";
 import { Program } from "../entity/program";
 import create_program_view from "../view/view_program";
+import { logger } from "../index";
 
 const view_programs = async (_req: Request, res: Response) => {
   try {
@@ -41,7 +42,7 @@ const view_programs = async (_req: Request, res: Response) => {
 
     res.status(200).json(view.getData());
   } catch (err) {
-    console.log(err.stack);
+    logger.error(err);
     res.status(404).send("ERROR");
   }
 };
@@ -59,7 +60,7 @@ const add_program = async (req: Request, res: Response) => {
 
     res.status(201).json(new_device);
   } catch (err) {
-    console.log(err.stack);
+    logger.error(err);
     if (err instanceof QueryFailedError) {
       res.status(404).send(err.message);
     } else {
@@ -77,7 +78,7 @@ const delete_program = async (req: Request, res: Response) => {
 
     res.status(200).json(program_details);
   } catch (err) {
-    console.log(err.stack);
+    logger.error(err);
     res.status(404).send("ERROR");
   }
 };
@@ -92,12 +93,9 @@ const end_program = async (req: Request, res: Response) => {
       Program.update({ id }, ele);
     });
 
-    console.log(program_details);
-    console.log(deprecated);
-
     res.status(200).json(program_details);
   } catch (err) {
-    console.log(err.stack);
+    logger.error(err);
     res.status(404).send("ERROR");
   }
 };

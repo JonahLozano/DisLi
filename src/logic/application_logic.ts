@@ -3,6 +3,7 @@ import { Application } from "../entity/application";
 import { EntityNotFoundError, QueryFailedError } from "typeorm";
 import { Person } from "../entity/person";
 import { Item } from "../entity/item";
+import { logger } from "../index";
 
 const view_all_applications = async (_req: Request, res: Response) => {
   try {
@@ -10,7 +11,7 @@ const view_all_applications = async (_req: Request, res: Response) => {
 
     res.status(200).json(item_details);
   } catch (err) {
-    console.log(err.stack);
+    logger.error(err);
     res.status(404).send("ERROR");
   }
 };
@@ -23,7 +24,7 @@ const view_application = async (req: Request, res: Response) => {
 
     res.status(200).json(item_details);
   } catch (err) {
-    console.log(err.stack);
+    logger.error(err);
     if (err instanceof EntityNotFoundError) {
       res.status(404).send(err.message);
     } else {
@@ -50,7 +51,7 @@ const add_application = async (req: Request, res: Response) => {
 
     res.status(201).json(new_application);
   } catch (err) {
-    console.log(err.stack);
+    logger.error(err);
     if (err instanceof QueryFailedError) {
       res.status(404).send(err.message);
     } else if (err instanceof EntityNotFoundError) {
@@ -72,7 +73,7 @@ const deicide_on_application = async (req: Request, res: Response) => {
 
     res.status(200).json(program_details);
   } catch (err) {
-    console.log(err.stack);
+    logger.error(err);
     res.status(404).send("ERROR");
   }
 };
