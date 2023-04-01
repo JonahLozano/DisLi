@@ -32,4 +32,4 @@ jobs:
           script: |
             cd /home/ubuntu/DisLi
             sudo docker-compose down
-            docker-compose up --build -d
+            sudo docker-compose up --build -d
