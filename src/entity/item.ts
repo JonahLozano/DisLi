@@ -5,16 +5,10 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   PrimaryColumn,
+  // OneToOne,
 } from "typeorm";
-
-export enum DeviceStatus {
-  CHECKEDOUT = "checkedout",
-  RESERVED = "reserved",
-  LOST = "lost",
-  STOLEN = "stolen",
-  BROKEN = "broken",
-  CHECKEDIN = "checkedin",
-}
+import { DeviceStatus } from "../utils/DeviceStatus";
+// import { Checkout } from "./checkout";
 
 @Entity("Item")
 export class Item extends BaseEntity {
@@ -34,7 +28,7 @@ export class Item extends BaseEntity {
     type: "enum",
     enum: DeviceStatus,
     // nullable: true,
-    default: DeviceStatus.CHECKEDIN,
+    default: DeviceStatus.AVAILIABLE,
   })
   status: DeviceStatus;
 
