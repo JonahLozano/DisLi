@@ -19,6 +19,8 @@ const view_person = async (_req: Request, res: Response) => {
       .innerJoinAndSelect("checkout.item", "item")
       .where("person.university_id = :university_id", {
         university_id: person_details!.university_id,
+      })
+      .andWhere("item.status = :status", {
         status: DeviceStatus.RESERVED,
       })
       .getOne();
@@ -28,14 +30,17 @@ const view_person = async (_req: Request, res: Response) => {
       .innerJoinAndSelect("checkout.item", "item")
       .where("person.university_id = :university_id", {
         university_id: person_details!.university_id,
+      })
+      .andWhere("item.status = :status", {
         status: DeviceStatus.CHECKEDOUT,
       })
       .getOne();
 
-    appointments?.checkout.forEach((checkout) => {
-      const { checkout_date, university_id } = checkout;
-      // const { brand, model, code_name } = checkout.item;
-      profile_page.addTableRow(university_id.university_id, checkout_date);
+    appointments?.checkout.forEach((checkout, idx) => {
+      const checkout_date = checkout.checkout_date;
+      const university_id = appointments.university_id;
+
+      profile_page.addTableRow(idx + 1, university_id, checkout_date);
     });
 
     myDevices?.checkout.forEach((checkout) => {
@@ -76,14 +81,6 @@ const checkout_item = async (_req: Request, res: Response) => {
     // find person object
     const person_details = await Person.findOneBy({ university_id });
 
-    // const profile = await Person.createQueryBuilder("person")
-    //   .innerJoinAndSelect("person.checkout", "checkout")
-    //   .innerJoinAndSelect("checkout.item", "item")
-    //   .where("person.university_id = :university_id", {
-    //     university_id: person_details!.university_id,
-    //   })
-    //   .getOne();
-
     // find device object
     const device_details = await Item.findOneBy({
       brand,
@@ -117,6 +114,12 @@ const checkout_item = async (_req: Request, res: Response) => {
 
     // insert checkout object
     await Checkout.insert(checkout_details);
+
+    // update device status to reserved
+    await Item.update(
+      { serial_number: device_details!.serial_number },
+      { status: DeviceStatus.RESERVED }
+    );
 
     // return checkout object
     res.status(200).json({});
