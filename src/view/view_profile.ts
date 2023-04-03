@@ -142,17 +142,17 @@ export = class create_profile_view {
     return this.data;
   }
 
-  addTableRow(university_id: string, checkout_date: Date) {
+  addTableRow(idx: number, university_id: string, checkout_date: Date) {
     this.data.content[2].content[1].rows.push({
       cells: [
         {
-          title: "Number Index",
+          title: `${idx}`,
         },
         {
           title: `${university_id}`,
         },
         {
-          title: `${checkout_date}`,
+          title: `${checkout_date.toLocaleDateString()} ${checkout_date.toLocaleTimeString()}`,
         },
       ],
     });
@@ -173,7 +173,7 @@ export = class create_profile_view {
         alt: `${brand} ${model} `,
       },
       title: `${brand} ${model}`,
-      description: `Return on ${return_date} <br> ${code_name}`,
+      description: `Return on ${return_date.toLocaleDateString()} ${return_date.toLocaleTimeString()} <br> ${code_name}`,
     });
   }
 };
