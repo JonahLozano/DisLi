@@ -162,7 +162,7 @@ export = class create_profile_view {
     brand: string,
     model: string,
     code_name: string,
-    return_date: string
+    return_date: Date
   ) {
     this.data.content[4].content[1].items.push({
       elementType: "contentCard",
