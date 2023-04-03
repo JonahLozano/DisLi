@@ -27,7 +27,7 @@ export = class create_profile_view {
             {
               title: "Check Out Device",
               link: {
-                relativePath: "/checkout",
+                relativePath: "/checkouts",
               },
               image: {
                 url: "https://i.ibb.co/TMpxVGP/shopping.png",
