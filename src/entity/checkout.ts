@@ -4,16 +4,23 @@ import {
   BaseEntity,
   CreateDateColumn,
   UpdateDateColumn,
-  PrimaryColumn,
   ManyToOne,
+  PrimaryGeneratedColumn,
+  OneToOne,
+  JoinColumn,
 } from "typeorm";
 
 import { Person } from "./person";
+import { Item } from "./item";
 
 @Entity("Checkout")
 export class Checkout extends BaseEntity {
-  @PrimaryColumn()
-  serial_number: string; // one to one relationship with iventory item
+  @PrimaryGeneratedColumn("uuid")
+  id: string;
+
+  @OneToOne(() => Item)
+  @JoinColumn()
+  item: Item;
 
   @ManyToOne(() => Person, (university_id) => university_id.checkout)
   university_id: Person;
