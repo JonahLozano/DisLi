@@ -136,7 +136,7 @@ describe("Inventory tests", () => {
                 },
               ],
               description:
-                "<span style='color:red;font-size:1.0025rem'>checkedin</span><span style='font-size:1.0025rem'> - Samsung Galaxy Tab S7</span><br></br>Nerd Tablets",
+                "<span style='color:red;font-size:1.0025rem'>availiable</span><span style='font-size:1.0025rem'> - Samsung Galaxy Tab S7</span><br></br>Nerd Tablets",
               elementType: "blockHeading",
               heading: "345678912",
               headingLevel: 2,
@@ -178,7 +178,7 @@ describe("Inventory tests", () => {
                 },
               ],
               description:
-                "<span style='color:red;font-size:1.0025rem'>checkedin</span><span style='font-size:1.0025rem'> - Apple iPad (2022)</span><br></br>Freshman iPads",
+                "<span style='color:red;font-size:1.0025rem'>availiable</span><span style='font-size:1.0025rem'> - Apple iPad (2022)</span><br></br>Freshman iPads",
               elementType: "blockHeading",
               heading: "234567891",
               headingLevel: 2,
@@ -220,7 +220,7 @@ describe("Inventory tests", () => {
                 },
               ],
               description:
-                "<span style='color:red;font-size:1.0025rem'>checkedin</span><span style='font-size:1.0025rem'> - Apple iPad (2022)</span><br></br>Freshman iPads",
+                "<span style='color:red;font-size:1.0025rem'>availiable</span><span style='font-size:1.0025rem'> - Apple iPad (2022)</span><br></br>Freshman iPads",
               elementType: "blockHeading",
               heading: "123456789",
               headingLevel: 2,
@@ -325,7 +325,7 @@ describe("Inventory tests", () => {
                 },
               ],
               description:
-                "<span style='color:red;font-size:1.0025rem'>checkedin</span><span style='font-size:1.0025rem'> - Samsung Galaxy Tab S7</span><br></br>Nerd Tablets",
+                "<span style='color:red;font-size:1.0025rem'>availiable</span><span style='font-size:1.0025rem'> - Samsung Galaxy Tab S7</span><br></br>Nerd Tablets",
               elementType: "blockHeading",
               heading: "345678912",
               headingLevel: 2,
@@ -367,7 +367,7 @@ describe("Inventory tests", () => {
                 },
               ],
               description:
-                "<span style='color:red;font-size:1.0025rem'>checkedin</span><span style='font-size:1.0025rem'> - Apple iPad (2022)</span><br></br>Freshman iPads",
+                "<span style='color:red;font-size:1.0025rem'>availiable</span><span style='font-size:1.0025rem'> - Apple iPad (2022)</span><br></br>Freshman iPads",
               elementType: "blockHeading",
               heading: "234567891",
               headingLevel: 2,
@@ -409,7 +409,7 @@ describe("Inventory tests", () => {
                 },
               ],
               description:
-                "<span style='color:red;font-size:1.0025rem'>checkedin</span><span style='font-size:1.0025rem'> - Apple iPad (2020)</span><br></br>Freshman iPads",
+                "<span style='color:red;font-size:1.0025rem'>availiable</span><span style='font-size:1.0025rem'> - Apple iPad (2020)</span><br></br>Freshman iPads",
               elementType: "blockHeading",
               heading: "123456789",
               headingLevel: 2,
@@ -517,7 +517,7 @@ describe("Inventory tests", () => {
                 },
               ],
               description:
-                "<span style='color:red;font-size:1.0025rem'>checkedin</span><span style='font-size:1.0025rem'> - Samsung Galaxy Tab S7</span><br></br>Nerd Tablets",
+                "<span style='color:red;font-size:1.0025rem'>availiable</span><span style='font-size:1.0025rem'> - Samsung Galaxy Tab S7</span><br></br>Nerd Tablets",
               elementType: "blockHeading",
               heading: "345678912",
               headingLevel: 2,
@@ -559,7 +559,7 @@ describe("Inventory tests", () => {
                 },
               ],
               description:
-                "<span style='color:red;font-size:1.0025rem'>checkedin</span><span style='font-size:1.0025rem'> - Apple iPad (2022)</span><br></br>Freshman iPads",
+                "<span style='color:red;font-size:1.0025rem'>availiable</span><span style='font-size:1.0025rem'> - Apple iPad (2022)</span><br></br>Freshman iPads",
               elementType: "blockHeading",
               heading: "234567891",
               headingLevel: 2,
@@ -667,7 +667,7 @@ describe("Inventory tests", () => {
                 },
               ],
               description:
-                "<span style='color:red;font-size:1.0025rem'>checkedin</span><span style='font-size:1.0025rem'> - Samsung Galaxy Tab S7</span><br></br>Nerd Tablets",
+                "<span style='color:red;font-size:1.0025rem'>availiable</span><span style='font-size:1.0025rem'> - Samsung Galaxy Tab S7</span><br></br>Nerd Tablets",
               elementType: "blockHeading",
               heading: "345678912",
               headingLevel: 2,
