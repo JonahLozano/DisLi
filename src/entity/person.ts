@@ -39,16 +39,16 @@ export class Person extends BaseEntity {
   role: UserRole;
 
   @OneToMany(() => Checkout, (checkout) => checkout.university_id)
-  checkout: Checkout;
+  checkout: Checkout[];
 
   @OneToMany(() => Waitlist, (waitlist) => waitlist.university_id)
-  waitlist: Waitlist;
+  waitlist: Waitlist[];
 
   @OneToMany(() => Application, (application) => application.university_id)
-  application: Application;
+  application: Application[];
 
   @OneToMany(() => Help, (help) => help.university_id)
-  help: Help;
+  help: Help[];
 
   @CreateDateColumn({
     type: "timestamp",
