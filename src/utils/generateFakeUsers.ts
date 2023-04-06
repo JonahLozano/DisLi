@@ -33,16 +33,19 @@ export const generateFakeUsers = async () => {
   try {
     await Person.insert(alice);
   } catch (err) {
-    logger.info(`Alison already exists in db`);
+    logger.error(err.stack);
+    logger.info("The resource you request already exists.");
   }
   try {
     await Person.insert(bob);
   } catch (err) {
-    logger.info(`Bob already exists in db`);
+    logger.error(err.stack);
+    logger.info("The resource you request already exists.");
   }
   try {
     await Person.insert(charlie);
   } catch (err) {
-    logger.info(`Charlie already exists in db`);
+    logger.error(err.stack);
+    logger.info("The resource you request already exists.");
   }
 };
