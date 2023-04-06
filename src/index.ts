@@ -4,6 +4,7 @@ import express from "express";
 import routes from "./routes";
 import { generateFakeUsers } from "./utils/generateFakeUsers";
 import * as winston from "winston";
+import { errorHandler } from "./utils/errorHandler";
 
 const port = 4000;
 
@@ -13,6 +14,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 routes(app);
+
+app.use(errorHandler);
 
 const logger = winston.createLogger({
   level: "info",

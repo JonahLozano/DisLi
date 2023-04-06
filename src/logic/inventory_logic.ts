@@ -1,12 +1,14 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { Item } from "../entity/item";
-import { EntityNotFoundError, QueryFailedError } from "typeorm";
 import { replaceAll } from "../utils/replaceAll";
 import create_inventory_view from "../view/view_inventory";
 import create_inventory_item_view from "../view/view_inventory_item";
-import { logger } from "../index";
 
-const view_inventory = async (_req: Request, res: Response) => {
+const view_inventory = async (
+  _req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     const item_details = await Item.find({
       where: { deprecated: false },
@@ -34,12 +36,11 @@ const view_inventory = async (_req: Request, res: Response) => {
 
     res.status(200).json(inv.getData());
   } catch (err) {
-    logger.error(err);
-    res.status(404).send("ERROR");
+    next(err);
   }
 };
 
-const view_item = async (req: Request, res: Response) => {
+const view_item = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const serial_number = req.params.id;
 
@@ -57,16 +58,11 @@ const view_item = async (req: Request, res: Response) => {
 
     res.status(200).json(item.getData());
   } catch (err) {
-    logger.error(err);
-    if (err instanceof EntityNotFoundError) {
-      res.status(404).send(err.message);
-    } else {
-      res.status(400).send("ERROR");
-    }
+    next(err);
   }
 };
 
-const add_item = async (req: Request, res: Response) => {
+const add_item = async (req: Request, res: Response, next: NextFunction) => {
   const data: any = {
     metadata: {
       version: "2.0",
@@ -146,20 +142,11 @@ const add_item = async (req: Request, res: Response) => {
 
     res.status(201).json(data);
   } catch (err) {
-    logger.error(err);
-    if (err instanceof QueryFailedError) {
-      data.content[1].items[0].description =
-        "<span style='color:red;'>Item already exists in inventory</span>";
-      res.status(400).send(data);
-    } else {
-      data.content[1].items[0].description =
-        "<span style='color:red;'>You tried to do something silly!</span>";
-      res.status(400).send(data);
-    }
+    next(err);
   }
 };
 
-const modify_item = async (req: Request, res: Response) => {
+const modify_item = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const serial_number = req.body.serial_number;
 
@@ -277,12 +264,7 @@ const modify_item = async (req: Request, res: Response) => {
       res.status(201).json(existing_item);
     }
   } catch (err) {
-    logger.error(err);
-    if (err instanceof QueryFailedError) {
-      res.status(404).send(err.message);
-    } else {
-      res.status(400).send("ERROR");
-    }
+    next(err);
   }
 };
 

@@ -1,21 +1,26 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { Help } from "../entity/help";
 import { Person } from "../entity/person";
-import { EntityNotFoundError, QueryFailedError } from "typeorm";
-import { logger } from "../index";
 
-const view_help_queue = async (_req: Request, res: Response) => {
+const view_help_queue = async (
+  _req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     const item_details = await Help.findBy({});
 
     res.status(200).json(item_details);
   } catch (err) {
-    logger.error(err);
-    res.status(404).send("ERROR");
+    next(err);
   }
 };
 
-const view_help_request = async (req: Request, res: Response) => {
+const view_help_request = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     const id = req.params.id;
 
@@ -23,16 +28,15 @@ const view_help_request = async (req: Request, res: Response) => {
 
     res.status(200).json(item_details);
   } catch (err) {
-    logger.error(err);
-    if (err instanceof EntityNotFoundError) {
-      res.status(404).send(err.message);
-    } else {
-      res.status(400).send("ERROR");
-    }
+    next(err);
   }
 };
 
-const view_help_request_authored = async (req: Request, res: Response) => {
+const view_help_request_authored = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     const { university_id } = req.body;
 
@@ -42,12 +46,15 @@ const view_help_request_authored = async (req: Request, res: Response) => {
 
     res.status(200).json(help_requests_authored);
   } catch (err) {
-    logger.error(err);
-    res.status(404).send("ERROR");
+    next(err);
   }
 };
 
-const request_help = async (req: Request, res: Response) => {
+const request_help = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     const { room, problem } = req.body;
 
@@ -63,16 +70,15 @@ const request_help = async (req: Request, res: Response) => {
 
     res.status(201).json(new_device);
   } catch (err) {
-    logger.error(err);
-    if (err instanceof QueryFailedError) {
-      res.status(404).send(err.message);
-    } else {
-      res.status(400).send("ERROR");
-    }
+    next(err);
   }
 };
 
-const close_help_request = async (req: Request, res: Response) => {
+const close_help_request = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     const { id, resolved } = req.body;
 
@@ -84,14 +90,7 @@ const close_help_request = async (req: Request, res: Response) => {
 
     res.status(201).json(existing_help_request);
   } catch (err) {
-    logger.error(err);
-    if (err instanceof EntityNotFoundError) {
-      res.status(404).send(err.message);
-    } else if (err instanceof QueryFailedError) {
-      res.status(400).send(err.message);
-    } else {
-      res.status(400).send("ERROR");
-    }
+    next(err);
   }
 };
 

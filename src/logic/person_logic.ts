@@ -1,5 +1,4 @@
-import { Request, Response } from "express";
-import { logger } from "../index";
+import { NextFunction, Request, Response } from "express";
 import create_profile_view from "../view/view_profile";
 import create_profile_checkout_view from "../view/view_profile_checkout";
 import { Person } from "../entity/person";
@@ -7,7 +6,11 @@ import { Item } from "../entity/item";
 import { DeviceStatus } from "../utils/DeviceStatus";
 import { Checkout } from "../entity/checkout";
 
-const view_person = async (_req: Request, res: Response) => {
+const view_person = async (
+  _req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     const university_id = "0000-0000-0000-0001";
     const person_details = await Person.findOneBy({ university_id });
@@ -51,12 +54,15 @@ const view_person = async (_req: Request, res: Response) => {
 
     res.status(200).json(profile_page.getData());
   } catch (err) {
-    logger.error(err);
-    res.status(404).send("ERROR");
+    next(err);
   }
 };
 
-const view_checkout = async (_req: Request, res: Response) => {
+const view_checkout = async (
+  _req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     // const university_id = "0000-0000-0000-0001";
     // const person_details = await Person.findOneBy({ university_id });
@@ -65,12 +71,15 @@ const view_checkout = async (_req: Request, res: Response) => {
 
     res.status(200).json(profile_page.getData());
   } catch (err) {
-    logger.error(err);
-    res.status(404).send("ERROR");
+    next(err);
   }
 };
 
-const checkout_item = async (_req: Request, res: Response) => {
+const checkout_item = async (
+  _req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     // get data from request that shows what item is being attempted to be checked out
     const { brand, model, code_name, checkout_date, checkout_time } = _req.body;
@@ -124,8 +133,7 @@ const checkout_item = async (_req: Request, res: Response) => {
     // return checkout object
     res.status(200).json({});
   } catch (err) {
-    logger.error(err);
-    res.status(404).send("ERROR");
+    next(err);
   }
 };
 

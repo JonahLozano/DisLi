@@ -1,10 +1,12 @@
-import { Request, Response } from "express";
-import { QueryFailedError } from "typeorm";
+import { NextFunction, Request, Response } from "express";
 import { Program } from "../entity/program";
 import create_program_view from "../view/view_program";
-import { logger } from "../index";
 
-const view_programs = async (_req: Request, res: Response) => {
+const view_programs = async (
+  _req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     const item_details = await Program.findBy({});
 
@@ -42,12 +44,11 @@ const view_programs = async (_req: Request, res: Response) => {
 
     res.status(200).json(view.getData());
   } catch (err) {
-    logger.error(err);
-    res.status(404).send("ERROR");
+    next(err);
   }
 };
 
-const add_program = async (req: Request, res: Response) => {
+const add_program = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { code_name, availiable_to } = req.body;
 
@@ -60,16 +61,15 @@ const add_program = async (req: Request, res: Response) => {
 
     res.status(201).json(new_device);
   } catch (err) {
-    logger.error(err);
-    if (err instanceof QueryFailedError) {
-      res.status(404).send(err.message);
-    } else {
-      res.status(400).send("ERROR");
-    }
+    next(err);
   }
 };
 
-const delete_program = async (req: Request, res: Response) => {
+const delete_program = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     const { code_name, availiable_to } = req.body;
     const program_details = await Program.findBy({ code_name, availiable_to });
@@ -78,12 +78,11 @@ const delete_program = async (req: Request, res: Response) => {
 
     res.status(200).json(program_details);
   } catch (err) {
-    logger.error(err);
-    res.status(404).send("ERROR");
+    next(err);
   }
 };
 
-const end_program = async (req: Request, res: Response) => {
+const end_program = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { id, code_name, deprecated } = req.body;
     const program_details = await Program.findBy({ code_name });
@@ -95,8 +94,7 @@ const end_program = async (req: Request, res: Response) => {
 
     res.status(200).json(program_details);
   } catch (err) {
-    logger.error(err);
-    res.status(404).send("ERROR");
+    next(err);
   }
 };
 

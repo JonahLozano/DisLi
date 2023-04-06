@@ -1,22 +1,27 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { Application } from "../entity/application";
-import { EntityNotFoundError, QueryFailedError } from "typeorm";
 import { Person } from "../entity/person";
 import { Item } from "../entity/item";
-import { logger } from "../index";
 
-const view_all_applications = async (_req: Request, res: Response) => {
+const view_all_applications = async (
+  _req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     const item_details = await Application.findBy({});
 
     res.status(200).json(item_details);
   } catch (err) {
-    logger.error(err);
-    res.status(404).send("ERROR");
+    next(err);
   }
 };
 
-const view_application = async (req: Request, res: Response) => {
+const view_application = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     const { id } = req.params;
 
@@ -24,16 +29,15 @@ const view_application = async (req: Request, res: Response) => {
 
     res.status(200).json(item_details);
   } catch (err) {
-    logger.error(err);
-    if (err instanceof EntityNotFoundError) {
-      res.status(404).send(err.message);
-    } else {
-      res.status(400).send("ERROR");
-    }
+    next(err);
   }
 };
 
-const add_application = async (req: Request, res: Response) => {
+const add_application = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     const { brand, model, university_id } = req.body;
 
@@ -51,18 +55,15 @@ const add_application = async (req: Request, res: Response) => {
 
     res.status(201).json(new_application);
   } catch (err) {
-    logger.error(err);
-    if (err instanceof QueryFailedError) {
-      res.status(404).send(err.message);
-    } else if (err instanceof EntityNotFoundError) {
-      res.status(404).send(err.message);
-    } else {
-      res.status(400).send("ERROR");
-    }
+    next(err);
   }
 };
 
-const deicide_on_application = async (req: Request, res: Response) => {
+const deicide_on_application = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     const { decision, brand, model, university_id } = req.body;
 
@@ -73,8 +74,7 @@ const deicide_on_application = async (req: Request, res: Response) => {
 
     res.status(200).json(program_details);
   } catch (err) {
-    logger.error(err);
-    res.status(404).send("ERROR");
+    next(err);
   }
 };
 
