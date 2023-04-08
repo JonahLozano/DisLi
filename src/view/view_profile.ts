@@ -61,7 +61,7 @@ export = class create_profile_view {
               elementType: "blockHeading",
               heading: "My Appointments",
               headingTextAlignment: "center",
-              headingLevel: 3,
+              headingLevel: 2,
             },
             {
               elementType: "table",
@@ -113,7 +113,7 @@ export = class create_profile_view {
         },
         {
           elementType: "container",
-          wrapperStyle: "subfocal",
+          backgroundColor: "navy",
           margin: "none",
           padding: "medium",
           content: [
@@ -121,7 +121,7 @@ export = class create_profile_view {
               elementType: "blockHeading",
               heading: "My Devices",
               headingTextAlignment: "center",
-              headingLevel: 3,
+              headingLevel: 2,
             },
             {
               elementType: "cardSet",
