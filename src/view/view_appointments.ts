@@ -11,7 +11,7 @@ export = class create_appointments_view {
             elementType: "blockHeading",
             heading: "Appointments",
             headingTextAlignment: "center",
-            headingLevel: 1,
+            headingLevel: 1
           },
           {
             "elementType": "container",
@@ -28,23 +28,59 @@ export = class create_appointments_view {
       return this.data;
     }
 
-    addAppointment(idx: number, university_id: string, return_date: Date, checkout_date: Date) {
+    addAppointment(idx: number, application_id: string, university_id: string, item: string, checkout_date: Date, return_date: Date) {
         this.data.content[1].content.push({
             "id": `${idx}`,
             "elementType": "blockHeading",
-            "heading": "1",
+            "heading": `${idx}`,
             "headingLevel": 2,
-            "description": "<span style='color:red;font-size:1.0025rem'>availiable</span><span style='font-size:1.0025rem'> - Apple iPad (2021)</span><br></br>Freshman iPads",
+            "description": `<span>User ID: ${university_id}</span><br><span>Item: ${item}</span><br><span>Check Out Date: ${checkout_date}</span><br>Return Date: ${return_date}`,
             "buttons": [
               {
-                "elementType": "linkButton",
-                "title": "information",
-                "accessoryIcon": "notification_information",
-                "actionStyle": "normal",
-                "accessoryIconPosition": "iconOnly",
-                "link": {
-                  "relativePath": "/1"
-                }
+                "elementType": "formButton",
+                "title": "Accept Application",
+                "icon": "confirm",
+                "buttonType": "submit",
+                "actionStyle": "constructive",
+                "iconPosition": "iconOnly",
+                "confirmationMessage": "Are you sure you want to accept this application?",
+                "events": [
+                  {
+                    "eventName": "click",
+                    "action": "ajaxUpdate",
+                    "useRelativePathToUpdate": true,
+                    "targetId": `${idx}`,
+                    "ajaxRelativePath": "/",
+                    "requestMethod": "put",
+                    "postData": {
+                      "application_id": `${application_id}`,
+                      "deprecated": true
+                    }
+                  }
+                ]
+              },
+              {
+                "elementType": "formButton",
+                "title": "decline",
+                "icon": "deny",
+                "buttonType": "submit",
+                "actionStyle": "destructive",
+                "iconPosition": "iconOnly",
+                "confirmationMessage": "Are you sure you want to decline this application?",
+                "events": [
+                  {
+                    "eventName": "click",
+                    "action": "ajaxUpdate",
+                    "useRelativePathToUpdate": true,
+                    "targetId": `${idx}`,
+                    "ajaxRelativePath": "/",
+                    "requestMethod": "put",
+                    "postData": {
+                      "application_id": `${application_id}`,
+                      "deprecated": true
+                    }
+                  }
+                ]
               },
               {
                 "elementType": "formButton",
@@ -53,17 +89,17 @@ export = class create_appointments_view {
                 "buttonType": "submit",
                 "actionStyle": "destructive",
                 "iconPosition": "iconOnly",
-                "confirmationMessage": "Are you sure you want to delete this?",
+                "confirmationMessage": "Are you sure you want to delete this application?",
                 "events": [
                   {
                     "eventName": "click",
                     "action": "ajaxUpdate",
                     "useRelativePathToUpdate": true,
-                    "targetId": "1",
+                    "targetId": `${idx}`,
                     "ajaxRelativePath": "/",
                     "requestMethod": "put",
                     "postData": {
-                      "serial_number": "1",
+                      "application_id": `${application_id}`,
                       "deprecated": true
                     }
                   }
