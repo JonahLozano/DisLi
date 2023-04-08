@@ -152,7 +152,7 @@ export = class create_profile_view {
   }
 
   addTableRow(idx: number, university_id: string, checkout_date: Date) {
-    this.data.content[2].content[1].rows.push({
+    this.data.content[3].content[1].rows.push({
       cells: [
         {
           title: `${idx}`,
@@ -173,7 +173,7 @@ export = class create_profile_view {
     code_name: string,
     return_date: Date
   ) {
-    this.data.content[4].content[1].items.push({
+    this.data.content[5].content[1].items.push({
       elementType: "contentCard",
       size: "small",
       imageStyle: "thumbnailSmall",
