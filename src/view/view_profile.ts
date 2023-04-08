@@ -52,14 +52,19 @@ export = class create_profile_view {
           ],
         },
         {
+          elementType: "divider",
+          borderColor: "transparent",
+        },
+        {
           elementType: "container",
-          wrapperStyle: "subfocal",
+          backgroundColor: "navy",
           margin: "none",
           padding: "medium",
           content: [
             {
               elementType: "blockHeading",
               heading: "My Appointments",
+              headingTextColor: "white",
               headingTextAlignment: "center",
               headingLevel: 2,
             },
@@ -70,9 +75,12 @@ export = class create_profile_view {
               outerBorderWidth: "2px",
               rowBorderWidth: "2px",
               columnBorderWidth: "2px",
-              outerBorderColor: "navy",
-              rowBorderColor: "navy",
-              columnBorderColor: "navy",
+              outerBorderColor: "white",
+              rowBorderColor: "white",
+              columnBorderColor: "white",
+              colHeaderTextColor: "white",
+              rowHeaderTextColor: "white",
+              titleTextColor: "white",
               paddingTop: "none",
               paddingBottom: "xtight",
               columnOptions: [
@@ -120,6 +128,7 @@ export = class create_profile_view {
             {
               elementType: "blockHeading",
               heading: "My Devices",
+              headingTextColor: "white",
               headingTextAlignment: "center",
               headingLevel: 2,
             },
@@ -168,12 +177,17 @@ export = class create_profile_view {
       elementType: "contentCard",
       size: "small",
       imageStyle: "thumbnailSmall",
+      borderWidth: "3px",
+      borderColor: "white",
+      borderRadius: "loose",
       image: {
         url: "https://i.ibb.co/G9LC6hK/devices.png",
         alt: `${brand} ${model} `,
       },
       title: `${brand} ${model}`,
+      titleTextColor: "white",
       description: `Return on ${return_date.toLocaleDateString()} ${return_date.toLocaleTimeString()} <br> ${code_name}`,
+      descriptionTextColor: "white"
     });
   }
 };
