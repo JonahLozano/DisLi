@@ -27,6 +27,7 @@ import application_logic = require("../logic/application_logic");
 //   authorize_page([UserRole.ADMIN]),
 //   application_logic.deicide_on_application
 // );
+router.get("/appointments", application_logic.view_appointments);
 
 router.get("/", application_logic.view_all_applications);
 
