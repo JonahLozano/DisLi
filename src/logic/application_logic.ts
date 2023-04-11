@@ -106,7 +106,7 @@ const view_appointments = async (
         const return_date = checkout.return_date;
 
         admin_appointment_page.addAppointment(
-          ++appCnt,
+          appCnt++,
           application_id,
           university_id,
           `${item.brand} - ${item.model}`,
