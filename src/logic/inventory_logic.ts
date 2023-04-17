@@ -11,7 +11,6 @@ const view_inventory = async (
 ) => {
   try {
     const item_details = await Item.find({
-      where: { deprecated: false },
       order: { created_at: "DESC" },
     });
 
