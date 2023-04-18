@@ -45,7 +45,7 @@ export = class create_inventory_view {
     model: string,
     code_name: string
   ) {
-    // TODO: use correct color for status element
+    // use correct color for status element
     this.data.content[1].content.push({
       id: id,
       elementType: "blockHeading",
