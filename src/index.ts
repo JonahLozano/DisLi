@@ -5,6 +5,9 @@ import routes from "./routes";
 import { generateFakeUsers } from "./utils/generateFakeUsers";
 import * as winston from "winston";
 import { errorHandler } from "./utils/errorHandler";
+import { scheduleJob } from "node-schedule";
+import { Checkout } from "./entity/checkout";
+import { LessThan } from "typeorm";
 
 const port = 4000;
 
@@ -40,6 +43,28 @@ const logger = winston.createLogger({
 
 const server = app.listen(port, () => {
   logger.info(`Express is listening on port ${port}`);
+});
+
+// TODO: add cronjob to remove appointments passed due
+scheduleJob("*/15 * * * *", async function () {
+  // find all checkouts passed their experation date + 15mins and remove them
+  try {
+    // given nothing display all pending items
+    const currentDateMinus15Minutes = new Date();
+    currentDateMinus15Minutes.setMinutes(
+      currentDateMinus15Minutes.getMinutes() - 15
+    );
+
+    const device_details = await Checkout.findBy({
+      checkout_date: LessThan(currentDateMinus15Minutes),
+    });
+
+    const removed_users = await Checkout.remove(device_details);
+
+    console.log(`Removed ${removed_users.length} missed appointments`);
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 export { app, server, logger };
