@@ -1,9 +1,8 @@
 import { NextFunction, Request, Response } from "express";
 import { Item } from "../entity/item";
-import { replaceAll } from "../utils/replaceAll";
-import create_inventory_view from "../view/view_inventory";
+import create_stat_view from "src/view/view_stats";
 
-const view_inventory = async (
+const view_stats = async (
     _req: Request,
     res: Response,
     next: NextFunction
@@ -36,8 +35,18 @@ const view_inventory = async (
             }   
             
       });
-  
       
+      //Desired standard statistic for available devices
+      let len = item_details.size();
+      let inv = new create_stat_view();
+      inv.addFirst(availableCount, reservedCount, (len - (availableCount + reservedCount)));
+
+      //Get stats for other programs
+      for(let i = 0; i < programs.length; i++){
+        let other = len - programCount[i]; 
+        inv.addItem(programs[i], programCount[i], programs[i], other);
+      }
+
       
       //Send complete view
       res.status(200).json(inv.getData());
@@ -45,4 +54,6 @@ const view_inventory = async (
       next(err);
     }
   };
+
+  export = {view_stats};
 
