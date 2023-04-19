@@ -45,13 +45,17 @@ export = class create_inventory_view {
     model: string,
     code_name: string
   ) {
-    // TODO: use correct color for status element
+    // use correct color for status element
     this.data.content[1].content.push({
       id: id,
       elementType: "blockHeading",
       heading: serial_number,
       headingLevel: 2,
-      description: `<span style='color:red;font-size:1.0025rem'>${status}</span><span style='font-size:1.0025rem'> - ${brand} ${model}</span><br></br>${code_name}`,
+      description: `<span ${
+        status === "available"
+          ? "style='color:green;font-size:1.0025rem'"
+          : "style='color:red;font-size:1.0025rem'"
+      }>${status}</span><span style='font-size:1.0025rem'> - ${brand} ${model}</span><br></br>${code_name}`,
       buttons: [
         {
           elementType: "linkButton",

@@ -146,6 +146,7 @@ const add_item = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
+// Add a modify item function
 const modify_item = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const serial_number = req.body.serial_number;
@@ -164,105 +165,7 @@ const modify_item = async (req: Request, res: Response, next: NextFunction) => {
 
     await Item.update({ serial_number }, existing_item);
 
-    if (deprecated === true) {
-      const anID = replaceAll(serial_number, "-", "");
-
-      const thing = {
-        metadata: {
-          version: "2.0",
-        },
-        elementFields: {
-          heading: "<span style='color:red;'>REMOVED</span>",
-          headingLevel: 3,
-          description: "",
-          buttons: [
-            {
-              elementType: "formButton",
-              title: "undo",
-              icon: "reload",
-              buttonType: "submit",
-              actionStyle: "destructive",
-              iconPosition: "iconOnly",
-              confirmationMessage: "Are you sure you want to undo this?",
-              events: [
-                {
-                  eventName: "click",
-                  action: "ajaxUpdate",
-                  useRelativePathToUpdate: true,
-                  targetId: anID,
-                  ajaxRelativePath: "/",
-                  requestMethod: "put",
-                  postData: {
-                    serial_number,
-                    deprecated: false,
-                  },
-                },
-              ],
-            },
-          ],
-        },
-      };
-
-      res.status(201).json(thing);
-    } else if (deprecated === false) {
-      const item_details = await Item.findOneBy({ serial_number });
-
-      const anID = replaceAll(serial_number, "-", "");
-
-      const thing = {
-        metadata: {
-          version: "2.0",
-        },
-        elementFields: {
-          heading: serial_number,
-          headingLevel: 2,
-          description: `<span style='color:red;font-size:1.0025rem'>${
-            item_details!.status
-          }</span><span style='font-size:1.0025rem'> - ${item_details!.brand} ${
-            item_details!.model
-          }</span><br></br>${item_details!.code_name}`,
-          buttons: [
-            {
-              elementType: "linkButton",
-              title: "information",
-              icon: "notification_information",
-              iconPosition: "iconOnly",
-              actionStyle: "normal",
-              link: {
-                relativePath: " ",
-              },
-            },
-            {
-              elementType: "formButton",
-              title: "delete",
-              icon: "delete",
-              buttonType: "submit",
-              actionStyle: "destructive",
-              iconPosition: "iconOnly",
-              confirmationMessage: "Are you sure you want to delete this?",
-              events: [
-                {
-                  eventName: "click",
-                  action: "ajaxUpdate",
-                  useRelativePathToUpdate: true,
-                  targetId: anID,
-                  ajaxRelativePath: "/",
-                  requestMethod: "put",
-                  postData: {
-                    serial_number,
-                    deprecated: true,
-                  },
-                },
-              ],
-            },
-          ],
-        },
-      };
-
-      res.status(201).json(thing);
-    } else {
-      res.status(201).json(existing_item);
-    }
+    res.status(201).json(existing_item);
   } catch (err) {
     next(err);
   }
@@ -346,4 +249,44 @@ const add_item_page = async (_req: Request, res: Response) => {
   res.status(200).json(data);
 };
 
-export = { view_inventory, view_item, add_item, modify_item, add_item_page };
+// add report item as stolen/lost
+const report_item = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const { serial_number, status } = req.body;
+
+    const existing_item = await Item.findOneByOrFail({ serial_number });
+
+    Object.assign(existing_item, {
+      status,
+    });
+
+    await Item.update({ serial_number }, existing_item);
+
+    res.status(200).json({});
+  } catch (err) {
+    next(err);
+  }
+};
+
+// TODO: make search function
+const search_item = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const { serial_number } = req.body;
+
+    const item_details = await Item.findOneByOrFail({ serial_number });
+
+    res.status(200).json({ item_details });
+  } catch (err) {
+    next(err);
+  }
+};
+
+export = {
+  search_item,
+  report_item,
+  view_inventory,
+  view_item,
+  add_item,
+  modify_item,
+  add_item_page,
+};

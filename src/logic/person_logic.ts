@@ -5,6 +5,7 @@ import { Person } from "../entity/person";
 import { Item } from "../entity/item";
 import { DeviceStatus } from "../utils/DeviceStatus";
 import { Checkout } from "../entity/checkout";
+import { LessThan } from "typeorm";
 
 const view_person = async (
   _req: Request,
@@ -121,6 +122,8 @@ const checkout_item = async (
       checkout_date: appointment_time,
     });
 
+    console.log(checkout_details);
+
     // insert checkout object
     await Checkout.insert(checkout_details);
 
@@ -137,4 +140,75 @@ const checkout_item = async (
   }
 };
 
-export = { view_person, view_checkout, checkout_item };
+// Approve checkouts
+const approve_checkout = async (
+  _req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    // given the id of the item to be checked out
+    // change status from "Pending" to "Checkedout"
+    const { serial_number } = _req.body;
+    const existing_item = await Item.findOneByOrFail({ serial_number });
+
+    Object.assign(existing_item, {
+      status: DeviceStatus.CHECKEDOUT,
+    });
+
+    await Item.update({ serial_number }, existing_item);
+
+    res.status(200).json({ existing_item });
+  } catch (err) {
+    next(err);
+  }
+};
+// View checkouts
+const view_all_checkout = async (
+  _req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    // given nothing display all pending items
+    const device_details = await Item.findBy({
+      status: DeviceStatus.RESERVED,
+    });
+
+    res.status(200).json({ devices: device_details });
+  } catch (err) {
+    next(err);
+  }
+};
+
+// TODO: removed old checkouts
+const clean_checkouts = async (
+  _req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    // given nothing display all pending items
+    const currentDateMinus15Minutes = new Date();
+    currentDateMinus15Minutes.setMinutes(
+      currentDateMinus15Minutes.getMinutes() - 15
+    );
+
+    const device_details = await Checkout.findBy({
+      checkout_date: LessThan(currentDateMinus15Minutes),
+    });
+
+    res.status(200).json({ devices: device_details });
+  } catch (err) {
+    next(err);
+  }
+};
+
+export = {
+  clean_checkouts,
+  view_all_checkout,
+  approve_checkout,
+  view_person,
+  view_checkout,
+  checkout_item,
+};

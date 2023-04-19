@@ -33,7 +33,6 @@ const router = express.Router();
 
 router.get("/", help_logic.view_help_queue);
 
-// ADMIN/(TEACHER IF AUTHORIZED)
 router.get("/:id", help_logic.view_help_request);
 
 router.get("/user", help_logic.view_help_request_authored);
