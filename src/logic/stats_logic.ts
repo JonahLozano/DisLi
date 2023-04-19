@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { Item } from "../entity/item";
-import create_stat_view from "src/view/view_stats";
-import { DeviceStatus } from "src/utils/DeviceStatus";
+import create_stat_view from "../view/view_stats";
+import { DeviceStatus } from "../utils/DeviceStatus";
 
 const view_stats = async (
     _req: Request,
@@ -54,6 +54,7 @@ const view_stats = async (
       let len = item_details.length;
       let inv = new create_stat_view();
       inv.addFirst(availableCount, reservedCount, checkedOut, (len - (availableCount + reservedCount + checkedOut)));
+      inv.addItem("broken", broken, "broken", (len - broken));
 
       //Get stats for other programs
       for(let i = 0; i < programs!.length; i++){
