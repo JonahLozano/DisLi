@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { Program } from "../entity/program";
-import create_programs_view from "src/view/view_programs";
+import create_programs_view from "../view/view_programs";
 
 const view_programs = async (
   _req: Request,
