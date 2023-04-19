@@ -55,6 +55,8 @@ const view_stats = async (
       let inv = new create_stat_view();
       inv.addFirst(availableCount, reservedCount, checkedOut, (len - (availableCount + reservedCount + checkedOut)));
       inv.addItem("broken", broken, "broken", (len - broken));
+      inv.addItem("lost", lost, "lost", (len - lost));
+      inv.addItem("stolen", broken, "stolen", (len - stolen));
 
       //Get stats for other programs
       for(let i = 0; i < programs!.length; i++){
