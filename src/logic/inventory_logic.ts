@@ -79,45 +79,6 @@ const add_item = async (req: Request, res: Response, next: NextFunction) => {
         },
         content: [
           {
-            elementType: "divider",
-            borderColor: "transparent",
-          },
-          {
-            elementType: "dropdown",
-            id: "dropdown",
-            title: "Explore",
-            items: [
-              {
-                title: "Profile",
-                link: {
-                  external:
-                    "https://fsm4sbx-test.modolabs.net/fresno_state_default_persona/profile_page/index",
-                },
-              },
-              {
-                title: "Appointments",
-                link: {
-                  external:
-                    "https://fsm4sbx-test.modolabs.net/fresno_state_default_persona/appointments_page/index",
-                },
-              },
-              {
-                title: "Inventory",
-                link: {
-                  external:
-                    "https://fsm4sbx-test.modolabs.net/fresno_state_default_persona/inventory_page/index",
-                },
-              },
-              {
-                title: "Tech Support",
-                link: {
-                  external:
-                    "https://fsm4sbx-test.modolabs.net/fresno_state_default_persona/tech_support_page/index",
-                },
-              },
-            ],
-          },
-          {
             elementType: "heroImage",
             image: {
               url: "https://i.ibb.co/KW611xF/Logo.png",
@@ -135,6 +96,41 @@ const add_item = async (req: Request, res: Response, next: NextFunction) => {
       {
         elementType: "divider",
         borderColor: "transparent",
+      },
+      {
+        elementType: "dropdown",
+        id: "dropdown",
+        title: "Explore",
+        items: [
+          {
+            title: "Profile",
+            link: {
+              external:
+                "https://fsm4sbx-test.modolabs.net/fresno_state_default_persona/profile_page/index",
+            },
+          },
+          {
+            title: "Appointments",
+            link: {
+              external:
+                "https://fsm4sbx-test.modolabs.net/fresno_state_default_persona/appointments_page/index",
+            },
+          },
+          {
+            title: "Inventory",
+            link: {
+              external:
+                "https://fsm4sbx-test.modolabs.net/fresno_state_default_persona/inventory_page/index",
+            },
+          },
+          {
+            title: "Tech Support",
+            link: {
+              external:
+                "https://fsm4sbx-test.modolabs.net/fresno_state_default_persona/tech_support_page/index",
+            },
+          },
+        ],
       },
       {
         elementType: "form",
@@ -259,45 +255,6 @@ const add_item_page = async (_req: Request, res: Response) => {
           cropVerticalPosition: "center",
         },
         content: [
-          {
-            elementType: "divider",
-            borderColor: "transparent",
-          },
-          {
-            elementType: "dropdown",
-            id: "dropdown",
-            title: "Explore",
-            items: [
-              {
-                title: "Profile",
-                link: {
-                  external:
-                    "https://fsm4sbx-test.modolabs.net/fresno_state_default_persona/profile_page/index",
-                },
-              },
-              {
-                title: "Appointments",
-                link: {
-                  external:
-                    "https://fsm4sbx-test.modolabs.net/fresno_state_default_persona/appointments_page/index",
-                },
-              },
-              {
-                title: "Inventory",
-                link: {
-                  external:
-                    "https://fsm4sbx-test.modolabs.net/fresno_state_default_persona/inventory_page/index",
-                },
-              },
-              {
-                title: "Tech Support",
-                link: {
-                  external:
-                    "https://fsm4sbx-test.modolabs.net/fresno_state_default_persona/tech_support_page/index",
-                },
-              },
-            ],
-          },
           {
             elementType: "heroImage",
             image: {
