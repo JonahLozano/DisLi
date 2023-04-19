@@ -103,7 +103,7 @@ export = class create_profile_view {
               title: "Lost / Broken Device Form",
               link: {
                 external:
-                  "https://docs.google.com/forms/d/e/1FAIpQLSdFzMoX9i8MR0JEOgp5eddefcTxZQgZZC3ud1T25LkNeE1c3A/viewform?usp=sf_link",
+                  "https://fsm4sbx-test.modolabs.net/fresno_state_default_persona/lbs_device_form_page/index",
               },
               image: {
                 url: "https://i.ibb.co/NrHQq0s/brokendevice.png",
