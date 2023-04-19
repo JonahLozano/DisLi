@@ -1,6 +1,6 @@
 import express from "express";
 const router = express.Router();
-import program_logic from "../logic/program_logic_2";
+import program_logic from "../logic/program_logic";
 
 router.get("/", program_logic.view_programs);
 

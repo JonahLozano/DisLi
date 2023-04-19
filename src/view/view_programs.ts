@@ -31,7 +31,7 @@ export = class create_programs_view {
     last_updated: Date
   ) {
     this.data.content[1].content.push({
-      id: `${program_uuid}`,
+      id: `${idx}`,
       elementType: "blockHeading",
       heading: `${idx}. ${code_name}`,
       headingLevel: 2,
@@ -50,7 +50,7 @@ export = class create_programs_view {
               eventName: "click",
               action: "ajaxUpdate",
               useRelativePathToUpdate: true,
-              targetId: `${program_uuid}`,
+              targetId: `${idx}`,
               ajaxRelativePath: "/",
               requestMethod: "put",
               postData: {
