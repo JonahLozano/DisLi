@@ -12,8 +12,8 @@ const view_stats = async (_req: Request, res: Response, next: NextFunction) => {
     });
 
     //Get numbers for stats
-    let programs: string[];
-    let programCount: number[];
+    let programs: string[] = [];
+    let programCount: number[] = [];
     let availableCount = 0;
     let reservedCount = 0;
     let checkedOut = 0;
@@ -29,22 +29,26 @@ const view_stats = async (_req: Request, res: Response, next: NextFunction) => {
       else if (ele.status == DeviceStatus.LOST) lost++;
       else if (ele.status == DeviceStatus.STOLEN) stolen++;
 
-            if(programs.indexOf(ele.code_name) != -1)
-                programCount[programs.indexOf(ele.code_name)]++;
-            else{
-                programs.push(ele.code_name);
-                programCount[programs.indexOf(ele.code_name)] = 1;
-            }   
-            
-      });
-      
-      //Desired standard statistic for available devices
-      let len = item_details.length;
-      let inv = new create_stat_view();
-      inv.addFirst(availableCount, reservedCount, checkedOut, (len - (availableCount + reservedCount + checkedOut)));
-      inv.addItem("broken", broken, "broken", (len - broken));
-      inv.addItem("lost", lost, "lost", (len - lost));
-      inv.addItem("stolen", broken, "stolen", (len - stolen));
+      if (programs.indexOf(ele.code_name) != -1)
+        programCount[programs.indexOf(ele.code_name)]++;
+      else {
+        programs.push(ele.code_name);
+        programCount[programs.indexOf(ele.code_name)] = 1;
+      }
+    });
+
+    //Desired standard statistic for available devices
+    let len = item_details.length;
+    let inv = new create_stat_view();
+    inv.addFirst(
+      availableCount,
+      reservedCount,
+      checkedOut,
+      len - (availableCount + reservedCount + checkedOut)
+    );
+    inv.addItem("broken", broken, "broken", len - broken);
+    inv.addItem("lost", lost, "lost", len - lost);
+    inv.addItem("stolen", broken, "stolen", len - stolen);
 
     //Get stats for other programs
     for (let i = 0; i < programs!.length; i++) {
