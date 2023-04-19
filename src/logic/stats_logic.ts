@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { Item } from "../entity/item";
 import create_stat_view from "src/view/view_stats";
+import { DeviceStatus } from "src/utils/DeviceStatus";
 
 const view_stats = async (
     _req: Request,
@@ -21,11 +22,24 @@ const view_stats = async (
       let programCount: number[];
       let availableCount = 0;
       let reservedCount = 0;
+      let checkedOut = 0;
+      let broken = 0;
+      let lost = 0;
+      let stolen = 0;
+
       item_details.forEach((ele) => {
-            if(ele.status == "available")
+            if(ele.status == DeviceStatus.AVAILIABLE)
                 availableCount++;
-            else if(ele.status == "reserved")
+            else if(ele.status == DeviceStatus.RESERVED)
                 reservedCount++;
+            else if(ele.status == DeviceStatus.CHECKEDOUT)
+              checkedOut++;
+            else if(ele.status == DeviceStatus.BROKEN)
+              broken++;
+            else if(ele.status == DeviceStatus.LOST)
+              lost++;
+            else if(ele.status == DeviceStatus.STOLEN)
+              stolen++;
 
             if(programs.indexOf(ele.code_name) != -1)
                 programCount[programs.indexOf(ele.code_name)]++;
@@ -37,14 +51,14 @@ const view_stats = async (
       });
       
       //Desired standard statistic for available devices
-      let len = item_details.size();
+      let len = item_details.length;
       let inv = new create_stat_view();
-      inv.addFirst(availableCount, reservedCount, (len - (availableCount + reservedCount)));
+      inv.addFirst(availableCount, reservedCount, checkedOut, (len - (availableCount + reservedCount + checkedOut)));
 
       //Get stats for other programs
-      for(let i = 0; i < programs.length; i++){
-        let other = len - programCount[i]; 
-        inv.addItem(programs[i], programCount[i], programs[i], other);
+      for(let i = 0; i < programs!.length; i++){
+        let other = len - programCount![i]; 
+        inv.addItem(programs![i], programCount![i], programs![i], other);
       }
 
       
