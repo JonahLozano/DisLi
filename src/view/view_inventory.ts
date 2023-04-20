@@ -115,7 +115,7 @@ export = class create_inventory_view {
       heading: serial_number,
       headingLevel: 2,
       description: `<span ${
-        status == "available"
+        status == "availiable"
           ? "style='color:green;font-size:1.0025rem'"
           : "style='color:red;font-size:1.0025rem'"
       }>${status}</span><span style='font-size:1.0025rem'> - ${brand} ${model}</span><br></br>${code_name}`,
