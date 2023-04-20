@@ -100,7 +100,6 @@ export = class create_stat_view {
   addFirst(
     available: number,
     reserved: number,
-    checkedNumber: number,
     other: number
   ) {
     this.data.content.push({
@@ -110,8 +109,6 @@ export = class create_stat_view {
       availableLabel: "available",
       busyNumber: reserved,
       busyLabel: "reserved",
-      checkedNumber: checkedNumber,
-      checkedLabel: "checked out",
       otherNumber: other,
       otherLabel: "other",
       marginTop: "none",

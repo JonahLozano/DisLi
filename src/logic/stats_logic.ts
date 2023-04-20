@@ -43,8 +43,7 @@ const view_stats = async (_req: Request, res: Response, next: NextFunction) => {
     inv.addFirst(
       availableCount,
       reservedCount,
-      checkedOut,
-      len - (availableCount + reservedCount + checkedOut)
+      len - (availableCount + reservedCount)
     );
     inv.addItem("broken", broken, "broken", len - broken);
     inv.addItem("lost", lost, "lost", len - lost);
