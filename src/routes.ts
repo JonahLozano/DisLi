@@ -1,4 +1,5 @@
 import { Express } from "express";
+import Launcher from "./routes/launcher";
 import Application from "./routes/application";
 import Help from "./routes/help";
 import Inventory from "./routes/inventory";
@@ -9,6 +10,7 @@ import Dev from "./utils/dev";
 import Home from "./utils/home";
 
 const routes = (app: Express) => {
+  app.use("/launcher", Launcher);
   app.use("/application", Application);
   app.use("/stats", Stats);
   app.use("/help", Help);
