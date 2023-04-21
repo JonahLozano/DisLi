@@ -80,14 +80,13 @@ export = class create_launcher_student_view {
             {
               title: "My Profile",
               link: {
-                external: "../../profile",
+                relativePath: "../../profile",
               },
             },
             {
               title: "Technology Support",
               link: {
-                external:
-                  "https://fsm4sbx-test.modolabs.net/fresno_state_default_persona/tech_support_page/index",
+                relativePath: "../../tech_support",
               },
             },
           ],

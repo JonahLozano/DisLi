@@ -98,8 +98,7 @@ export = class create_launcher_admin_view {
             {
               title: "Technology Support",
               link: {
-                relativePath:
-                  "https://fsm4sbx-test.modolabs.net/fresno_state_default_persona/tech_support_page/index",
+                relativePath: "../../tech_support",
               },
             },
           ],
