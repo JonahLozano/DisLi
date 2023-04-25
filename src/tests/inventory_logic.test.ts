@@ -1,4 +1,3 @@
-/*
 import { request } from "./setup";
 import { clearDB } from "../utils/clearDB";
 
@@ -39,6 +38,7 @@ describe("Inventory tests", () => {
     expect(response.body).toStrictEqual(data);
   });
 
+  /*
   test("Add 3 items", async () => {
     const data1 = {
       serial_number: "123456789",
@@ -756,6 +756,5 @@ describe("Inventory tests", () => {
 
     expect(response.body).toStrictEqual(data);
   });
+  */
 });
-
-*/
