@@ -3,7 +3,7 @@ import { clearDB } from "../utils/clearDB";
 
 describe("Inventory tests", () => {
   test("View an empty inventory", async () => {
-    await clearDB();
+    await clearDB(); // clears database
     const response = await request.get("/inventory");
 
     const data = {
@@ -39,49 +39,203 @@ describe("Inventory tests", () => {
   });
 
   test("Add 3 items", async () => {
-    const data1 = {
-      serial_number: "123456789",
-      brand: "Apple",
-      model: "iPad (2022)",
-      code_name: "Freshman iPads",
-    };
+    const items = [
+      {
+        serial_number: "123456789",
+        brand: "Apple",
+        model: "iPad (2022)",
+        code_name: "Freshman iPads",
+      },
+      {
+        serial_number: "234567891",
+        brand: "Apple",
+        model: "iPad (2022)",
+        code_name: "Freshman iPads",
+      },
+      {
+        serial_number: "345678912",
+        brand: "Samsung",
+        model: "Galaxy Tab S7",
+        code_name: "Nerd Tablets",
+      },
+    ];
+    for (const item of items){
+      const response = await request
+        .post("/inventory/add")
+        .set("Content-Type", "application/x-www-form-urlencoded")
+        .send(item);
+      expect(response.status).toBe(201);
+        
+    }
+    
 
-    const response1 = await request
-      .post("/inventory/add")
-      .set("Content-Type", "application/x-www-form-urlencoded")
-      .send(data1);
-
-    expect(response1.status).toBe(201);
-
-    const data2 = {
-      serial_number: "234567891",
-      brand: "Apple",
-      model: "iPad (2022)",
-      code_name: "Freshman iPads",
-    };
-
-    const response2 = await request
-      .post("/inventory/add")
-      .set("Content-Type", "application/x-www-form-urlencoded")
-      .send(data2);
-
-    expect(response2.status).toBe(201);
-
-    const data3 = {
-      serial_number: "345678912",
-      brand: "Samsung",
-      model: "Galaxy Tab S7",
-      code_name: "Nerd Tablets",
-    };
-
-    const response3 = await request
-      .post("/inventory/add")
-      .set("Content-Type", "application/x-www-form-urlencoded")
-      .send(data3);
-
-    expect(response3.status).toBe(201);
   });
 
+
+  test("Add 3 wrong items", async () => {
+    const items = [
+      {
+        serial_number: "246810",
+        brand: "Apple",
+        model: "iPad (2022)",
+        code_name: "Freshman iPads",
+      },
+      {
+        serial_number: "246810",
+        brand: "Apple",
+        model: "iPad (2022)",
+        code_name: "Freshman iPads",
+      },
+      {
+        serial_number: "246810",
+        brand: "Samsung",
+        model: "Galaxy Tab S7",
+        code_name: "Nerd Tablets",
+      },
+    ];
+    for (let i = 0; i < 1; i++){
+      const response = await request
+        .post("/inventory/add")
+        .set("Content-Type", "application/x-www-form-urlencoded")
+        .send(items[i]);
+      expect(response.status).toBe(201);
+    }
+
+    for (let i = 1; i < items.length; i++){
+      const response = await request
+        .post("/inventory/add")
+        .set("Content-Type", "application/x-www-form-urlencoded")
+        .send(items[i]);
+      expect(response.status).toBe(400);
+        
+    }
+    
+
+  });
+  /**
+  test("Add 3 varying brand", async () => {
+    const items = [
+      {
+        serial_number: "123456789",
+        brand: "Apple",
+        model: "iPad (2022)",
+        code_name: "Freshman iPads",
+      },
+      {
+        serial_number: "123456789",
+        brand: "Apple",
+        model: "iPad (2022)",
+        code_name: "Freshman iPads",
+      },
+      {
+        serial_number: "123456789",
+        brand: "Samsung",
+        model: "Galaxy Tab S7",
+        code_name: "Nerd Tablets",
+      },
+    ];
+    for (let i = 0; i < 1; i++){
+      const response = await request
+        .post("/inventory/add")
+        .set("Content-Type", "application/x-www-form-urlencoded")
+        .send(items[i]);
+      expect(response.status).toBe(201);
+    }
+
+    for (let i = 1; i < items.length; i++){
+      const response = await request
+        .post("/inventory/add")
+        .set("Content-Type", "application/x-www-form-urlencoded")
+        .send(items[i]);
+      expect(response.status).toBe(400);
+        
+    }
+    
+
+  });
+
+  test("Add 3 varying model items", async () => {
+    const items = [
+      {
+        serial_number: "123456789",
+        brand: "Apple",
+        model: "iPad (2022)",
+        code_name: "Freshman iPads",
+      },
+      {
+        serial_number: "123456789",
+        brand: "Apple",
+        model: "iPad (2022)",
+        code_name: "Freshman iPads",
+      },
+      {
+        serial_number: "123456789",
+        brand: "Samsung",
+        model: "Galaxy Tab S7",
+        code_name: "Nerd Tablets",
+      },
+    ];
+    for (let i = 0; i < 1; i++){
+      const response = await request
+        .post("/inventory/add")
+        .set("Content-Type", "application/x-www-form-urlencoded")
+        .send(items[i]);
+      expect(response.status).toBe(201);
+    }
+
+    for (let i = 1; i < items.length; i++){
+      const response = await request
+        .post("/inventory/add")
+        .set("Content-Type", "application/x-www-form-urlencoded")
+        .send(items[i]);
+      expect(response.status).toBe(400);
+        
+    }
+    
+
+  });
+
+  test("Add 3 varying codenames items", async () => {
+    const items = [
+      {
+        serial_number: "123456789",
+        brand: "Apple",
+        model: "iPad (2022)",
+        code_name: "Freshman iPads",
+      },
+      {
+        serial_number: "123456789",
+        brand: "Apple",
+        model: "iPad (2022)",
+        code_name: "Freshman iPads",
+      },
+      {
+        serial_number: "123456789",
+        brand: "Samsung",
+        model: "Galaxy Tab S7",
+        code_name: "Nerd Tablets",
+      },
+    ];
+    for (let i = 0; i < 1; i++){
+      const response = await request
+        .post("/inventory/add")
+        .set("Content-Type", "application/x-www-form-urlencoded")
+        .send(items[i]);
+      expect(response.status).toBe(201);
+    }
+
+    for (let i = 1; i < items.length; i++){
+      const response = await request
+        .post("/inventory/add")
+        .set("Content-Type", "application/x-www-form-urlencoded")
+        .send(items[i]);
+      expect(response.status).toBe(400);
+        
+    }
+    
+
+  });
+*/
   test("View items", async () => {
     const response = await request.get("/inventory");
 
@@ -247,29 +401,13 @@ describe("Inventory tests", () => {
       model: "iPad (2020)",
       code_name: "Freshman iPads",
     };
-
-    const response = await request
-      .put("/inventory")
-      .set("Content-Type", "application/x-www-form-urlencoded")
-      .send(data);
-
-    const test_data = {
-      brand: "Apple",
-      code_name: "Freshman iPads",
-      model: "iPad (2020)",
-      serial_number: "123456789",
-    };
-
-    const res_data = {
-      brand: response.body.brand,
-      code_name: response.body.code_name,
-      model: response.body.model,
-      serial_number: response.body.serial_number,
-    };
-
+  
+    const response = await request.put("/inventory").send(data);
+  
     expect(response.status).toBe(201);
-    expect(res_data).toStrictEqual(test_data);
+    expect(response.body).toMatchObject(data);
   });
+  
 
   test("View modified item", async () => {
     const response = await request.get("/inventory");

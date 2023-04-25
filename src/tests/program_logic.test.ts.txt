@@ -1,0 +1,82 @@
+import { request } from "./setup";
+import { clearDB } from "../utils/clearDB";
+
+describe("program tests", () => {
+    
+    test("Add 3 correct items", async () => {
+        await clearDB(); // clears database
+        const items = [
+        {
+            id: "12982735987",
+            code_name: "new ipads",
+            available_to: "freshman",
+            created_at: "now",
+            last_updated: "now",
+           
+        },
+        {
+            id: "sdfoiwjf",
+            code_name: "new ipads2",
+            available_to: "sophomore",
+            created_at: "now",
+            last_updated: "now",
+        },
+        {
+            id: "2349872359",
+            code_name: "new ipads3",
+            available_to: "junior",
+            created_at: "now",
+            last_updated: "now",
+        },
+        {
+            id: "92347865",
+            code_name: "new ipads4",
+            available_to: "senior",
+            created_at: "now",
+            last_updated: "now",
+        },
+        ];
+        for (const item of items){
+            const response = await request
+                .post("/program/")
+                .set("Content-Type", "application/x-www-form-urlencoded")
+                .send(item);
+            expect(response.status).toBe(201);
+        
+        }
+    
+
+    });
+    
+    test("Add 3 incorrect items", async () => {
+        const items = [
+        {
+            code_name: "new ipads5",
+            available_to: "none",
+           
+        },
+        {
+            code_name: "new ipads6",
+            available_to: "sophomore2",
+        },
+        {
+            code_name: "new ipads7",
+            available_to: "ajunior",
+        },
+        {
+            code_name: "new ipads8",
+            available_to: "everyone",
+        },
+        ];
+        for (const item of items){
+            const response = await request
+                .post("/program/")
+                .set("Content-Type", "application/x-www-form-urlencoded")
+                .send(item);
+            expect(response.status).toBe(400);
+        
+        }
+    
+
+    });
+});

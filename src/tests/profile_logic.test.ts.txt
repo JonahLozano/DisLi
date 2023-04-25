@@ -1,0 +1,12 @@
+import { request } from "./setup";
+import { clearDB } from "../utils/clearDB";
+
+describe("profile tests", () => {
+    test("View an empty inventory", async () => {
+    await clearDB(); // clears database
+    const response = await request.get("/profile");
+
+    
+  });
+
+});
