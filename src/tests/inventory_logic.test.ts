@@ -2,7 +2,6 @@ import { request } from "./setup";
 import { clearDB } from "../utils/clearDB";
 
 describe("Inventory tests", () => {
-  /*
   test("View an empty inventory", async () => {
     await clearDB();
     const response = await request.get("/inventory");
@@ -38,9 +37,7 @@ describe("Inventory tests", () => {
 
     expect(response.body).toStrictEqual(data);
   });
-  */
 
-  /*
   test("Add 3 items", async () => {
     const data1 = {
       serial_number: "123456789",
@@ -723,7 +720,6 @@ describe("Inventory tests", () => {
     expect(response.status).toBe(201);
     expect(res_data).toStrictEqual(test_data);
   });
-  */
 
   test("View empty inventory", async () => {
     const response = await request.get("/inventory");
