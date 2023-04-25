@@ -16,7 +16,7 @@ const view_stats = async (_req: Request, res: Response, next: NextFunction) => {
     let programCount: number[] = [];
     let availableCount = 0;
     let reservedCount = 0;
-    let checkedOut = 0;
+    // let checkedOut = 0;
     let broken = 0;
     let lost = 0;
     let stolen = 0;
@@ -24,7 +24,7 @@ const view_stats = async (_req: Request, res: Response, next: NextFunction) => {
     item_details.forEach((ele) => {
       if (ele.status == DeviceStatus.AVAILIABLE) availableCount++;
       else if (ele.status == DeviceStatus.RESERVED) reservedCount++;
-      else if (ele.status == DeviceStatus.CHECKEDOUT) checkedOut++;
+      // else if (ele.status == DeviceStatus.CHECKEDOUT) checkedOut++;
       else if (ele.status == DeviceStatus.BROKEN) broken++;
       else if (ele.status == DeviceStatus.LOST) lost++;
       else if (ele.status == DeviceStatus.STOLEN) stolen++;
