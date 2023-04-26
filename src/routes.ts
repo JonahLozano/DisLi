@@ -1,6 +1,7 @@
 import { Express } from "express";
 import Launcher from "./routes/launcher";
 import TechSupport from "./routes/tech_support";
+import LbsDevice from "./routes/lbs_device";
 import Application from "./routes/application";
 import Help from "./routes/help";
 import Inventory from "./routes/inventory";
@@ -13,6 +14,7 @@ import Home from "./utils/home";
 const routes = (app: Express) => {
   app.use("/launcher", Launcher);
   app.use("/tech_support", TechSupport);
+  app.use("/lbs_device", LbsDevice);
   app.use("/application", Application);
   app.use("/stats", Stats);
   app.use("/help", Help);
