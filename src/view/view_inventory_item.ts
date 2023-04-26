@@ -43,29 +43,25 @@ export = class create_inventory_item_view {
             {
               title: "Profile",
               link: {
-                external:
-                  "https://fsm4sbx-test.modolabs.net/fresno_state_default_persona/profile_page/index",
+                relativePath: "../../profile",
               },
             },
             {
               title: "Appointments",
               link: {
-                external:
-                  "https://fsm4sbx-test.modolabs.net/fresno_state_default_persona/appointments_page/index",
+                relativePath: "../../application/appointments",
               },
             },
             {
               title: "Inventory",
               link: {
-                external:
-                  "https://fsm4sbx-test.modolabs.net/fresno_state_default_persona/inventory_page/index",
+                relativePath: "../../inventory",
               },
             },
             {
               title: "Tech Support",
               link: {
-                external:
-                  "https://fsm4sbx-test.modolabs.net/fresno_state_default_persona/tech_support_page/index",
+                relativePath: "../../tech_support",
               },
             },
           ],
@@ -76,12 +72,6 @@ export = class create_inventory_item_view {
 
   getData() {
     return this.data;
-  }
-
-  addDivider() {
-    this.data.content[1].content.push({
-      elementType: "divider",
-    });
   }
 
   // TODO: Add a modify item function

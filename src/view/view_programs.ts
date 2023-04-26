@@ -43,29 +43,25 @@ export = class create_programs_view {
             {
               title: "Profile",
               link: {
-                external:
-                  "https://fsm4sbx-test.modolabs.net/fresno_state_default_persona/profile_page/index",
+                relativePath: "../../profile",
               },
             },
             {
               title: "Appointments",
               link: {
-                external:
-                  "https://fsm4sbx-test.modolabs.net/fresno_state_default_persona/appointments_page/index",
+                relativePath: "../../application/appointments",
               },
             },
             {
               title: "Inventory",
               link: {
-                external:
-                  "https://fsm4sbx-test.modolabs.net/fresno_state_default_persona/inventory_page/index",
+                relativePath: "../../inventory",
               },
             },
             {
               title: "Tech Support",
               link: {
-                external:
-                  "https://fsm4sbx-test.modolabs.net/fresno_state_default_persona/tech_support_page/index",
+                relativePath: "../../tech_support",
               },
             },
           ],
@@ -85,6 +81,16 @@ export = class create_programs_view {
     };
   }
 
+  getData() {
+    return this.data;
+  }
+
+  addDivider() {
+    this.data.content[3].content.push({
+      elementType: "divider",
+    });
+  }
+
   addProgram(
     idx: number,
     program_uuid: string,
@@ -93,7 +99,7 @@ export = class create_programs_view {
     created_at: Date,
     last_updated: Date
   ) {
-    this.data.content[1].content.push({
+    this.data.content[3].content.push({
       id: `${idx}`,
       elementType: "blockHeading",
       heading: `${idx}. ${code_name}`,
@@ -125,9 +131,5 @@ export = class create_programs_view {
         },
       ],
     });
-  }
-
-  getData() {
-    return this.data;
   }
 };

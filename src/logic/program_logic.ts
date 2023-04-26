@@ -24,6 +24,8 @@ const view_programs = async (
 
     const view = new create_programs_view();
 
+    view.addDivider();
+
     let counter = 1;
 
     if (item_details)
@@ -37,6 +39,7 @@ const view_programs = async (
           ele.last_updated
         );
         counter++;
+        view.addDivider();
       });
 
     res.status(200).json(view.getData());

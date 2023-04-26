@@ -37,34 +37,28 @@ export = class create_tech_support_view {
         },
         {
           id: "dropdown",
+          title: "Explore",
+          elementType: "dropdown",
           items: [
             {
+              title: "Profile",
               link: {
                 relativePath: "../../profile",
               },
-              title: "Profile",
             },
             {
+              title: "Appointments",
               link: {
                 relativePath: "../../application/appointments",
               },
-              title: "Appointments",
             },
             {
+              title: "Inventory",
               link: {
                 relativePath: "../../inventory",
               },
-              title: "Inventory",
-            },
-            {
-              link: {
-                relativePath: "../../tech_support",
-              },
-              title: "Tech Support",
             },
           ],
-          title: "Explore",
-          elementType: "dropdown",
         },
         {
           elementType: "container",

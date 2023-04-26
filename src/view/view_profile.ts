@@ -41,31 +41,21 @@ export = class create_profile_view {
           title: "Explore",
           items: [
             {
-              title: "Profile",
-              link: {
-                external:
-                  "https://fsm4sbx-test.modolabs.net/fresno_state_default_persona/profile_page/index",
-              },
-            },
-            {
               title: "Appointments",
               link: {
-                external:
-                  "https://fsm4sbx-test.modolabs.net/fresno_state_default_persona/appointments_page/index",
+                relativePath: "../../application/appointments",
               },
             },
             {
               title: "Inventory",
               link: {
-                external:
-                  "https://fsm4sbx-test.modolabs.net/fresno_state_default_persona/inventory_page/index",
+                relativePath: "../../inventory",
               },
             },
             {
               title: "Tech Support",
               link: {
-                external:
-                  "https://fsm4sbx-test.modolabs.net/fresno_state_default_persona/tech_support_page/index",
+                relativePath: "../../tech_support",
               },
             },
           ],
@@ -215,7 +205,7 @@ export = class create_profile_view {
   }
 
   addTableRow(idx: number, university_id: string, checkout_date: Date) {
-    this.data.content[3].content[1].rows.push({
+    this.data.content[5].content[1].rows.push({
       cells: [
         {
           title: `${idx}`,
@@ -236,7 +226,7 @@ export = class create_profile_view {
     code_name: string,
     return_date: Date
   ) {
-    this.data.content[5].content[1].items.push({
+    this.data.content[7].content[1].items.push({
       elementType: "contentCard",
       size: "small",
       imageStyle: "thumbnailSmall",
