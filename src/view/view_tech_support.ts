@@ -58,7 +58,7 @@ export = class create_tech_support_view {
             },
             {
               link: {
-                relativePath: "/",
+                relativePath: "../../tech_support",
               },
               title: "Tech Support",
             },
