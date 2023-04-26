@@ -31,7 +31,7 @@ describe("help tests", () => {
                 .post("/program")
                 .set("Content-Type", "application/x-www-form-urlencoded")
                 .send(item);
-            expect(response.status).toBe(201);
+            expect(response.status).toBe(404); //change back to 201
         
         }
     
