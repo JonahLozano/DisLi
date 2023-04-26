@@ -1,5 +1,5 @@
 import { request } from "./setup";
-import { clearDB } from "../utils/clearDB";
+//import { clearDB } from "../utils/clearDB";
 
 describe("help tests", () => {
     test("Add 3 correct items", async () => {
