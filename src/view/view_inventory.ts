@@ -117,7 +117,7 @@ export = class create_inventory_view {
           actionStyle: "normal",
           accessoryIconPosition: "iconOnly",
           link: {
-            relativePath: `/${serial_number}`,
+            relativePath: `../../inventory/${serial_number}`,
           },
         },
         {
