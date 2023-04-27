@@ -19,7 +19,7 @@ const routes = (app: Express) => {
   app.use("/stats", Stats);
   app.use("/help", Help);
   app.use("/inventory", Inventory);
-  app.use("/program", Program);
+  app.use("/programs", Program);
   app.use("/profile", Profile);
   app.use("/dev", Dev);
   app.use("/", Home);

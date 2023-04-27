@@ -53,6 +53,12 @@ export = class create_inventory_view {
               },
             },
             {
+              title: "Programs",
+              link: {
+                relativePath: "../../programs",
+              },
+            },
+            {
               title: "Tech Support",
               link: {
                 relativePath: "../../tech_support",

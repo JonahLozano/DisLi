@@ -30,14 +30,7 @@ const view_programs = async (
 
     if (item_details)
       item_details.forEach((ele) => {
-        view.addProgram(
-          counter,
-          ele.id,
-          ele.code_name,
-          ele.availiable_to,
-          ele.created_at,
-          ele.last_updated
-        );
+        view.addProgram(counter, ele.id, ele.code_name, ele.availiable_to);
         counter++;
         view.addDivider();
       });

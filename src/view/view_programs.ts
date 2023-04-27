@@ -95,16 +95,14 @@ export = class create_programs_view {
     idx: number,
     program_uuid: string,
     code_name: string,
-    availiable_to: string,
-    created_at: Date,
-    last_updated: Date
+    availiable_to: string
   ) {
     this.data.content[3].content.push({
       id: `${idx}`,
       elementType: "blockHeading",
       heading: `${idx}. ${code_name}`,
       headingLevel: 2,
-      description: `<span>Available to: ${availiable_to}</span><br><span>Created On: ${created_at}</span><br><span>Last Updated: ${last_updated}</span>`,
+      description: `<span>Available to: ${availiable_to}</span>`,
       buttons: [
         {
           elementType: "formButton",
