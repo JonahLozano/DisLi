@@ -4,7 +4,7 @@ import program_logic from "../logic/program_logic";
 
 router.get("/", program_logic.view_programs);
 
-router.get("/add", program_logic.view_add_program);
+//router.get("/add", program_logic.view_add_program);
 
 //router.delete("/", program_logic.delete_program);
 

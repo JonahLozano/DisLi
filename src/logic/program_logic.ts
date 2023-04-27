@@ -30,6 +30,7 @@ const view_programs = async (
   }
 };
 
+/*
 const view_add_program = async (
   _req: Request,
   res: Response,
@@ -40,6 +41,7 @@ const view_add_program = async (
     next(err);
   }
 };
+*/
 
 /*
 const view_program = async (
@@ -143,5 +145,4 @@ const end_program = async (req: Request, res: Response, next: NextFunction) => {
 
 export = {
   view_programs,
-  view_add_program,
 };
