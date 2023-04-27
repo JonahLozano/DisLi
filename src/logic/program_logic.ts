@@ -11,17 +11,6 @@ const view_programs = async (
     // get all programs in db
     const item_details = await Program.findBy({});
 
-    /*
-    let reduced_item_list: Array<{
-      id: string;
-      code_name: string;
-      availiable_to: string;
-      deprecated: boolean;
-      created_at: Date;
-      last_updated: Date;
-    }> = [];
-    */
-
     const view = new create_programs_view();
 
     view.addDivider();
@@ -36,6 +25,17 @@ const view_programs = async (
       });
 
     res.status(200).json(view.getData());
+  } catch (err) {
+    next(err);
+  }
+};
+
+const view_add_program = async (
+  _req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
   } catch (err) {
     next(err);
   }
@@ -143,4 +143,5 @@ const end_program = async (req: Request, res: Response, next: NextFunction) => {
 
 export = {
   view_programs,
+  view_add_program,
 };
