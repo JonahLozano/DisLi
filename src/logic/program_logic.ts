@@ -56,8 +56,42 @@ const add_program = async (req: Request, res: Response, next: NextFunction) => {
     await Program.insert(new_device);
     //res.status(201).json(new_device);
 
-    // redirect to view programs page
-    // get all programs in db
+    // redirect to view updated programs page
+    const item_details = await Program.findBy({});
+
+    const view = new create_programs_view();
+
+    view.addDivider();
+
+    let counter = 1;
+
+    if (item_details)
+      item_details.forEach((ele) => {
+        view.addProgram(counter, ele.id, ele.code_name, ele.availiable_to);
+        counter++;
+        view.addDivider();
+      });
+
+    res.status(200).json(view.getData());
+  } catch (err) {
+    next(err);
+  }
+};
+
+const delete_program = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { code_name, availiable_to } = req.body;
+
+    const program = await Program.findBy({ code_name, availiable_to });
+
+    await Program.remove(program);
+    //res.status(200).json(program);
+
+    // redirect to view updated programs page
     const item_details = await Program.findBy({});
 
     const view = new create_programs_view();
@@ -80,23 +114,6 @@ const add_program = async (req: Request, res: Response, next: NextFunction) => {
 };
 
 /*
-const delete_program = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  try {
-    const { code_name, availiable_to } = req.body;
-    const program_details = await Program.findBy({ code_name, availiable_to });
-
-    await Program.remove(program_details);
-
-    res.status(200).json(program_details);
-  } catch (err) {
-    next(err);
-  }
-};
-
 const end_program = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { id, code_name, deprecated } = req.body;
@@ -118,4 +135,5 @@ export = {
   view_programs,
   view_add_program,
   add_program,
+  delete_program,
 };
