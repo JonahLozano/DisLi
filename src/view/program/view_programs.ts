@@ -67,6 +67,22 @@ export = class create_programs_view {
           ],
         },
         {
+          elementType: "container",
+          id: "styles",
+          content: [
+            {
+              elementType: "linkButton",
+              title: "Add Program",
+              actionStyle: "constructive",
+              link: {
+                relativePath: "../../programs/add",
+              },
+              marginBottom: "xtight",
+              marginTop: "loose",
+            },
+          ],
+        },
+        {
           elementType: "blockHeading",
           heading: "Programs",
           headingTextAlignment: "center",
@@ -86,7 +102,7 @@ export = class create_programs_view {
   }
 
   addDivider() {
-    this.data.content[3].content.push({
+    this.data.content[4].content.push({
       elementType: "divider",
     });
   }
@@ -97,7 +113,7 @@ export = class create_programs_view {
     code_name: string,
     availiable_to: string
   ) {
-    this.data.content[3].content.push({
+    this.data.content[4].content.push({
       id: `${idx}`,
       elementType: "blockHeading",
       heading: `${idx}. ${code_name}`,
