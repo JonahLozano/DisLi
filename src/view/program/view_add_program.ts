@@ -67,13 +67,14 @@ export = class create_add_program_view {
           ],
         },
         {
+          elementType: "blockHeading",
+          heading: "Add Program",
+          headingTextAlignment: "center",
+          headingLevel: 1,
+        },
+        {
           elementType: "form",
           id: "add_program_form",
-          heading: {
-            heading: "Add Program",
-            headingLevel: 2,
-            description: "Items marked with an asterisk (*) are required.",
-          },
           items: [
             {
               elementType: "formInputText",
@@ -93,6 +94,7 @@ export = class create_add_program_view {
                 SENIOR: "senior",
               },
               fullWidth: true,
+              required: true,
             },
           ],
           buttons: [
