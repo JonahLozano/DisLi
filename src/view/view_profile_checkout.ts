@@ -75,6 +75,7 @@ export = class create_profile_checkout_view {
         {
           elementType: "form",
           id: "segmented",
+          relativePath: "../../profile/checkouts",
           items: [
             {
               elementType: "formInputSegmented",
