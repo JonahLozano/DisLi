@@ -6,8 +6,8 @@ router.get("/", program_logic.view_programs);
 
 router.get("/add", program_logic.view_add_program);
 
-//router.delete("/", program_logic.delete_program);
+router.post("/add", program_logic.add_program);
 
-//router.put("/", program_logic.end_program);
+//router.delete("/", program_logic.delete_program);
 
 export = router;

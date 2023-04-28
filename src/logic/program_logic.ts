@@ -44,55 +44,6 @@ const view_add_program = async (
   }
 };
 
-/*
-const view_program = async (
-    _req: Request,
-    res: Response,
-    next: NextFunction
-  ) => {
-    try {
-      const item_details = await Program.findBy({});
-  
-      let reduced_item_list: Array<{
-        id: string;
-        code_name: string;
-        availiable_to: [string];
-        deprecated: boolean;
-      }> = [];
-  
-      item_details.forEach((ele) => {
-        // find if the code_name is already in the list
-        const foundObject = reduced_item_list.find(
-          (obj) => obj.code_name === ele.code_name
-        );
-  
-        // if it is, add the availiable_to to the list
-        // if it isn't, add the code_name and availiable_to to the list
-        foundObject
-          ? foundObject.availiable_to.push(ele.availiable_to)
-          : reduced_item_list.push({
-              id: ele.id,
-              code_name: ele.code_name,
-              availiable_to: [ele.availiable_to],
-              deprecated: ele.deprecated,
-            });
-      });
-  
-      const view = new create_program_view();
-  
-      if (reduced_item_list)
-        reduced_item_list.forEach((ele) => {
-          view.addData(ele.id, ele.code_name, ele.availiable_to, ele.deprecated);
-        });
-  
-      res.status(200).json(view.getData());
-    } catch (err) {
-      next(err);
-    }
-  };
-  */
-
-/*
 const add_program = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { code_name, availiable_to } = req.body;
@@ -110,6 +61,7 @@ const add_program = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
+/*
 const delete_program = async (
   req: Request,
   res: Response,
@@ -147,4 +99,5 @@ const end_program = async (req: Request, res: Response, next: NextFunction) => {
 export = {
   view_programs,
   view_add_program,
+  add_program,
 };
