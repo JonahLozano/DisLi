@@ -116,16 +116,8 @@ export = class create_add_inventory_item_view {
           buttons: [
             {
               elementType: "formButton",
-              name: "s1_reset",
-              title: "Reset",
-              buttonType: "reset",
-              actionStyle: "destructiveQuiet",
-              minWidth: "8rem",
-            },
-            {
-              elementType: "formButton",
               name: "s1_submit",
-              title: "Submit",
+              title: "Add Item",
               buttonType: "submit",
               actionStyle: "constructive",
               minWidth: "8rem",

@@ -89,7 +89,9 @@ const add_item = async (req: Request, res: Response, next: NextFunction) => {
     });
 
     await Item.insert(new_device);
+    res.status(201).json(new_device);
 
+    /*
     // now display the inventory page
     const item_details = await Item.find({
       where: { deprecated: false },
@@ -116,6 +118,7 @@ const add_item = async (req: Request, res: Response, next: NextFunction) => {
     });
 
     res.status(201).json(inv.getData());
+    */
   } catch (err) {
     next(err);
   }
