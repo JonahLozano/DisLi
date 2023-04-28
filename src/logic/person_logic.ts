@@ -93,9 +93,9 @@ const checkout_item = async (
 
     // find device object
     const device_details = await Item.findOneBy({
-      brand,
+      //brand,
       model,
-      code_name,
+      //code_name,
       status: DeviceStatus.AVAILIABLE,
     });
 
