@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { Program } from "../entity/program";
 import create_programs_view from "../view/program/view_programs";
+import create_add_program_view from "../view/program/view_add_program";
 
 const view_programs = async (
   _req: Request,
@@ -30,19 +31,18 @@ const view_programs = async (
   }
 };
 
-/*
 const view_add_program = async (
   _req: Request,
   res: Response,
   next: NextFunction
 ) => {
   try {
-    const view = new create_programs_view();
+    const view = new create_add_program_view();
+    res.status(200).json(view.getData());
   } catch (err) {
     next(err);
   }
 };
-*/
 
 /*
 const view_program = async (
@@ -146,4 +146,5 @@ const end_program = async (req: Request, res: Response, next: NextFunction) => {
 
 export = {
   view_programs,
+  view_add_program,
 };

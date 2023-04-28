@@ -81,6 +81,19 @@ export = class create_add_program_view {
               label: "Code Name",
               required: true,
             },
+            {
+              elementType: "formInputSegmented",
+              name: "availiable_to",
+              options: {
+                ADMIN: "admin",
+                FACULTY: "faculty",
+                FRESHMEN: "freshman",
+                SOPHOMORE: "sophomore",
+                JUNIOR: "junior",
+                SENIOR: "senior",
+              },
+              fullWidth: true,
+            },
           ],
           buttons: [
             {
@@ -92,7 +105,7 @@ export = class create_add_program_view {
               minWidth: "8rem",
             },
           ],
-          trackDirtyStateButtonNames: ["code_name"],
+          trackDirtyStateButtonNames: ["code_name", "availiable_to"],
           buttonsHorizontalAlignment: "center",
         },
       ],
