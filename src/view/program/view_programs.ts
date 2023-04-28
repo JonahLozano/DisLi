@@ -117,7 +117,7 @@ export = class create_programs_view {
       buttons: [
         {
           elementType: "formButton",
-          title: "delete",
+          title: `Delete ${code_name}`,
           icon: "delete",
           buttonType: "submit",
           actionStyle: "destructive",

@@ -102,14 +102,13 @@ export = class create_add_program_view {
           buttons: [
             {
               elementType: "formButton",
-              name: "s1_submit",
-              title: "Submit",
+              name: "add_program_submit",
+              title: "Add Program",
               buttonType: "submit",
               actionStyle: "constructive",
               minWidth: "8rem",
             },
           ],
-          trackDirtyStateButtonNames: ["code_name", "availiable_to"],
           buttonsHorizontalAlignment: "center",
         },
       ],
