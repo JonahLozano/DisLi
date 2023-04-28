@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { Program } from "../entity/program";
-import create_programs_view from "../view/view_programs";
+import create_programs_view from "../view/program/view_programs";
 
 const view_programs = async (
   _req: Request,
@@ -37,6 +37,7 @@ const view_add_program = async (
   next: NextFunction
 ) => {
   try {
+    const view = new create_programs_view();
   } catch (err) {
     next(err);
   }

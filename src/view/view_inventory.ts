@@ -70,37 +70,37 @@ export = class create_inventory_view {
           elementType: "container",
           id: "styles",
           content: [
-              {
-                  elementType: "linkButton",
-                  title: "Add Item",
-                  actionStyle: "constructive",
-                  link: {
-                      relativePath: "/add",
-                  },
-                  marginBottom: "xtight",
-                  marginTop: "loose"
+            {
+              elementType: "linkButton",
+              title: "Add Item",
+              actionStyle: "constructive",
+              link: {
+                relativePath: "../../inventory/add",
               },
-              {
-                  elementType: "linkButton",
-                  title: "Item Stats",
-                  actionStyle: "constructive",
-                  link: {
-                      relativePath: "../../stats",
-                  },
-                  marginBottom: "xtight",
-                  marginTop: "loose"
+              marginBottom: "xtight",
+              marginTop: "loose",
+            },
+            {
+              elementType: "linkButton",
+              title: "Item Stats",
+              actionStyle: "constructive",
+              link: {
+                relativePath: "../../stats",
               },
-              {
-                elementType: "linkButton",
-                title: "Programs",
-                actionStyle: "constructive",
-                link: {
-                    relativePath: "../../programs",
-                },
-                marginBottom: "xtight",
-                marginTop: "loose"
-              }
-          ]
+              marginBottom: "xtight",
+              marginTop: "loose",
+            },
+            {
+              elementType: "linkButton",
+              title: "Programs",
+              actionStyle: "constructive",
+              link: {
+                relativePath: "../../programs",
+              },
+              marginBottom: "xtight",
+              marginTop: "loose",
+            },
+          ],
         },
         {
           elementType: "blockHeading",
@@ -127,7 +127,7 @@ export = class create_inventory_view {
   }
 
   addDivider() {
-    this.data.content[3].content.push({
+    this.data.content[4].content.push({
       elementType: "divider",
     });
   }
@@ -141,7 +141,7 @@ export = class create_inventory_view {
     code_name: string
   ) {
     // use correct color for status element
-    this.data.content[3].content.push({
+    this.data.content[4].content.push({
       id: id,
       elementType: "blockHeading",
       heading: serial_number,
