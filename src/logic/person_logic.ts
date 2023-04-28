@@ -84,10 +84,10 @@ const checkout_item = async (
   try {
     // get data from request that shows what item is being attempted to be checked out
     const { brand, model, code_name, checkout_date, checkout_time } = req.body;
+    console.log(req.body);
 
     // find user by university_id, in this case it is hardcoded; normally sent in jwt
     const university_id = "0000-0000-0000-0001";
-
     // find person object
     const person_details = await Person.findOneBy({ university_id });
 
@@ -99,6 +99,7 @@ const checkout_item = async (
       status: DeviceStatus.AVAILIABLE,
     });
 
+    // creating return date and return time (appointment_time)
     const return_date = new Date(checkout_date);
     return_date.setMonth(return_date.getMonth() + 6);
 
@@ -121,7 +122,6 @@ const checkout_item = async (
       return_date,
       checkout_date: appointment_time,
     });
-
     console.log(checkout_details);
 
     // insert checkout object
