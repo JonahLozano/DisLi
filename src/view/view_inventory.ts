@@ -67,6 +67,42 @@ export = class create_inventory_view {
           ],
         },
         {
+          elementType: "container",
+          id: "styles",
+          content: [
+              {
+                  elementType: "linkButton",
+                  title: "Add Item",
+                  actionStyle: "constructive",
+                  link: {
+                      relativePath: "/add",
+                  },
+                  marginBottom: "xtight",
+                  marginTop: "loose"
+              },
+              {
+                  elementType: "linkButton",
+                  title: "Item Stats",
+                  actionStyle: "constructive",
+                  link: {
+                      relativePath: "../../stats",
+                  },
+                  marginBottom: "xtight",
+                  marginTop: "loose"
+              },
+              {
+                elementType: "linkButton",
+                title: "Programs",
+                actionStyle: "constructive",
+                link: {
+                    relativePath: "../../programs",
+                },
+                marginBottom: "xtight",
+                marginTop: "loose"
+              }
+          ]
+        },
+        {
           elementType: "blockHeading",
           heading: "Inventory",
           headingLevel: 1,
