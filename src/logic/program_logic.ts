@@ -54,8 +54,26 @@ const add_program = async (req: Request, res: Response, next: NextFunction) => {
     });
 
     await Program.insert(new_device);
+    //res.status(201).json(new_device);
 
-    res.status(201).json(new_device);
+    // redirect to view programs page
+    // get all programs in db
+    const item_details = await Program.findBy({});
+
+    const view = new create_programs_view();
+
+    view.addDivider();
+
+    let counter = 1;
+
+    if (item_details)
+      item_details.forEach((ele) => {
+        view.addProgram(counter, ele.id, ele.code_name, ele.availiable_to);
+        counter++;
+        view.addDivider();
+      });
+
+    res.status(200).json(view.getData());
   } catch (err) {
     next(err);
   }

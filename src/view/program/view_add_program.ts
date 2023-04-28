@@ -86,6 +86,7 @@ export = class create_add_program_view {
             {
               elementType: "formInputSegmented",
               name: "availiable_to",
+              label: "Available to",
               options: {
                 admin: "admin",
                 faculty: "faculty",
