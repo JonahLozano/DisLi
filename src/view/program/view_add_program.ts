@@ -75,6 +75,7 @@ export = class create_add_program_view {
         {
           elementType: "form",
           id: "add_program_form",
+          relativePath: "../../programs/add",
           items: [
             {
               elementType: "formInputText",
