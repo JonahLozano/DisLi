@@ -176,7 +176,7 @@ export = class create_inventory_view {
               action: "ajaxUpdate",
               useRelativePathToUpdate: true,
               targetId: id,
-              ajaxRelativePath: "/",
+              ajaxRelativePath: "../../inventory",
               requestMethod: "put",
               postData: {
                 serial_number: serial_number,
