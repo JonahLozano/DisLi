@@ -20,7 +20,7 @@ const view_programs = async (
 
     if (item_details)
       item_details.forEach((ele) => {
-        view.addProgram(counter, ele.id, ele.code_name, ele.availiable_to);
+        view.addProgram(counter, ele.code_name, ele.availiable_to);
         counter++;
         view.addDivider();
       });
@@ -67,7 +67,7 @@ const add_program = async (req: Request, res: Response, next: NextFunction) => {
 
     if (item_details)
       item_details.forEach((ele) => {
-        view.addProgram(counter, ele.id, ele.code_name, ele.availiable_to);
+        view.addProgram(counter, ele.code_name, ele.availiable_to);
         counter++;
         view.addDivider();
       });
@@ -102,7 +102,7 @@ const delete_program = async (
 
     if (item_details)
       item_details.forEach((ele) => {
-        view.addProgram(counter, ele.id, ele.code_name, ele.availiable_to);
+        view.addProgram(counter, ele.code_name, ele.availiable_to);
         counter++;
         view.addDivider();
       });

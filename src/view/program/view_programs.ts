@@ -107,12 +107,7 @@ export = class create_programs_view {
     });
   }
 
-  addProgram(
-    idx: number,
-    program_uuid: string,
-    code_name: string,
-    availiable_to: string
-  ) {
+  addProgram(idx: number, code_name: string, availiable_to: string) {
     this.data.content[4].content.push({
       id: `${idx}`,
       elementType: "blockHeading",
@@ -134,7 +129,7 @@ export = class create_programs_view {
               action: "ajaxUpdate",
               useRelativePathToUpdate: true,
               targetId: `${idx}`,
-              ajaxRelativePath: "/delete",
+              ajaxRelativePath: "../../programs/delete",
               requestMethod: "put",
               postData: {
                 code_name: `${code_name}`,
