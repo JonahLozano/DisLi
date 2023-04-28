@@ -105,13 +105,8 @@ export = class create_inventory_view {
         {
           elementType: "blockHeading",
           heading: "Inventory",
+          headingTextAlignment: "center",
           headingLevel: 1,
-          headingFontWeight: "light",
-          description:
-            "<strong>Filter:</strong> <br></br>code name: 'placeholder text :)'",
-          descriptionLineHeight: "loose",
-          descriptionFontStyle: "italic",
-          descriptionTextColor: "#566573",
         },
         {
           elementType: "container",
