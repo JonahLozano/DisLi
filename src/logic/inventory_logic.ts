@@ -3,6 +3,7 @@ import { Item } from "../entity/item";
 import { replaceAll } from "../utils/replaceAll";
 import create_inventory_view from "../view/inventory/view_inventory";
 import create_inventory_item_view from "../view/inventory/view_inventory_item";
+import create_add_inventory_item_view from "../view/inventory/view_add_inventory_item";
 
 const view_inventory = async (
   _req: Request,
@@ -62,132 +63,22 @@ const view_item = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-const add_item = async (req: Request, res: Response, next: NextFunction) => {
-  const data: any = {
-    metadata: {
-      version: "2.0",
-    },
-    header: [
-      {
-        elementType: "hero",
-        height: "fluid",
-        contentContainerWidth: "wide",
-        backgroundImage: {
-          url: "https://i.ibb.co/qg9Fxq5/Banner-2.png",
-          alt: "Image of office. Photo by https://unsplash.com/@kpzhnv",
-          cropVerticalPosition: "center",
-        },
-        content: [
-          {
-            elementType: "heroImage",
-            image: {
-              url: "https://i.ibb.co/KW611xF/Logo.png",
-              alt: "Generic logo",
-            },
-            imageSize: "4em",
-            marginBottom: "5%",
-            marginTop: "loose",
-          },
-        ],
-      },
-    ],
-    contentContainerWidth: "narrow",
-    content: [
-      {
-        elementType: "divider",
-        borderColor: "transparent",
-      },
-      {
-        elementType: "dropdown",
-        id: "dropdown",
-        title: "Explore",
-        items: [
-          {
-            title: "Profile",
-            link: {
-              external:
-                "https://fsm4sbx-test.modolabs.net/fresno_state_default_persona/profile_page/index",
-            },
-          },
-          {
-            title: "Appointments",
-            link: {
-              external:
-                "https://fsm4sbx-test.modolabs.net/fresno_state_default_persona/appointments_page/index",
-            },
-          },
-          {
-            title: "Inventory",
-            link: {
-              external:
-                "https://fsm4sbx-test.modolabs.net/fresno_state_default_persona/inventory_page/index",
-            },
-          },
-          {
-            title: "Tech Support",
-            link: {
-              external:
-                "https://fsm4sbx-test.modolabs.net/fresno_state_default_persona/tech_support_page/index",
-            },
-          },
-        ],
-      },
-      {
-        elementType: "form",
-        id: "add_item_form",
-        heading: {
-          heading: "Add Inventory Item",
-          headingLevel: 2,
-          description: "Items marked with an asterisk (*) are required.",
-        },
-        items: [
-          {
-            elementType: "formInputBarcode",
-            name: "serial_number",
-            label: "Serial Number",
-            required: true,
-          },
-          {
-            elementType: "formInputText",
-            name: "brand",
-            label: "Brand",
-          },
-          {
-            elementType: "formInputText",
-            name: "model",
-            label: "Model",
-          },
-          {
-            elementType: "formInputText",
-            name: "code_name",
-            label: "Code Name",
-          },
-        ],
-        buttons: [
-          {
-            elementType: "formButton",
-            name: "s1_reset",
-            title: "Reset",
-            buttonType: "reset",
-            actionStyle: "destructiveQuiet",
-            minWidth: "8rem",
-          },
-          {
-            elementType: "formButton",
-            name: "s1_submit",
-            title: "Submit",
-            buttonType: "submit",
-            actionStyle: "constructive",
-            minWidth: "8rem",
-          },
-        ],
-        trackDirtyStateButtonNames: ["serial_number"],
-        buttonsHorizontalAlignment: "center",
-      },
-    ],
-  };
-
+const view_add_item = async (
+  _req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
+    const page = new create_add_inventory_item_view();
+    res.status(200).json(page.getData());
+  } catch (err) {
+    next(err);
+  }
+};
+
+const add_item = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    // insert item
     const { serial_number, brand, model, code_name } = req.body;
 
     const new_device = Item.create({
@@ -199,7 +90,32 @@ const add_item = async (req: Request, res: Response, next: NextFunction) => {
 
     await Item.insert(new_device);
 
-    res.status(201).json(data);
+    // now display the inventory page
+    const item_details = await Item.find({
+      where: { deprecated: false },
+      order: { created_at: "DESC" },
+    });
+
+    let inv = new create_inventory_view();
+
+    inv.addDivider();
+
+    item_details.forEach((ele) => {
+      const anID = replaceAll(ele.serial_number, "-", "");
+
+      inv.addItem(
+        anID,
+        ele.serial_number,
+        ele.status,
+        ele.brand,
+        ele.model,
+        ele.code_name
+      );
+
+      inv.addDivider();
+    });
+
+    res.status(201).json(inv.getData());
   } catch (err) {
     next(err);
   }
@@ -228,143 +144,6 @@ const modify_item = async (req: Request, res: Response, next: NextFunction) => {
   } catch (err) {
     next(err);
   }
-};
-
-const add_item_page = async (_req: Request, res: Response) => {
-  // const raw_LOB = await Item.createQueryBuilder("Item")
-  //   .select("Item.brand")
-  //   .distinct(true)
-  //   .getRawMany();
-
-  // const list_of_brands = raw_LOB
-  //   .map((ele) => ele.Item_brand)
-  //   .filter((ele) => ele !== "");
-
-  const data = {
-    metadata: {
-      version: "2.0",
-    },
-    header: [
-      {
-        elementType: "hero",
-        height: "fluid",
-        contentContainerWidth: "wide",
-        backgroundImage: {
-          url: "https://i.ibb.co/qg9Fxq5/Banner-2.png",
-          alt: "Image of office. Photo by https://unsplash.com/@kpzhnv",
-          cropVerticalPosition: "center",
-        },
-        content: [
-          {
-            elementType: "heroImage",
-            image: {
-              url: "https://i.ibb.co/KW611xF/Logo.png",
-              alt: "Generic logo",
-            },
-            imageSize: "4em",
-            marginBottom: "5%",
-            marginTop: "loose",
-          },
-        ],
-      },
-    ],
-    contentContainerWidth: "narrow",
-    content: [
-      {
-        elementType: "divider",
-        borderColor: "transparent",
-      },
-      {
-        elementType: "dropdown",
-        id: "dropdown",
-        title: "Explore",
-        items: [
-          {
-            title: "Profile",
-            link: {
-              external:
-                "https://fsm4sbx-test.modolabs.net/fresno_state_default_persona/profile_page/index",
-            },
-          },
-          {
-            title: "Appointments",
-            link: {
-              external:
-                "https://fsm4sbx-test.modolabs.net/fresno_state_default_persona/appointments_page/index",
-            },
-          },
-          {
-            title: "Inventory",
-            link: {
-              external:
-                "https://fsm4sbx-test.modolabs.net/fresno_state_default_persona/inventory_page/index",
-            },
-          },
-          {
-            title: "Tech Support",
-            link: {
-              external:
-                "https://fsm4sbx-test.modolabs.net/fresno_state_default_persona/tech_support_page/index",
-            },
-          },
-        ],
-      },
-      {
-        elementType: "form",
-        id: "add_item_form",
-        heading: {
-          heading: "Add Inventory Item",
-          headingLevel: 2,
-          description: "Items marked with an asterisk (*) are required.",
-        },
-        items: [
-          {
-            elementType: "formInputBarcode",
-            name: "serial_number",
-            label: "Serial Number",
-            required: true,
-          },
-          {
-            elementType: "formInputText",
-            name: "brand",
-            label: "Brand",
-          },
-          {
-            elementType: "formInputText",
-            name: "model",
-            label: "Model",
-          },
-          {
-            elementType: "formInputText",
-            name: "code_name",
-            label: "Code Name",
-          },
-        ],
-        buttons: [
-          {
-            elementType: "formButton",
-            name: "s1_reset",
-            title: "Reset",
-            buttonType: "reset",
-            actionStyle: "destructiveQuiet",
-            minWidth: "8rem",
-          },
-          {
-            elementType: "formButton",
-            name: "s1_submit",
-            title: "Submit",
-            buttonType: "submit",
-            actionStyle: "constructive",
-            minWidth: "8rem",
-          },
-        ],
-        trackDirtyStateButtonNames: ["serial_number"],
-        buttonsHorizontalAlignment: "center",
-      },
-    ],
-  };
-
-  res.status(200).json(data);
 };
 
 // add report item as stolen/lost
@@ -406,5 +185,5 @@ export = {
   view_item,
   add_item,
   modify_item,
-  add_item_page,
+  view_add_item,
 };

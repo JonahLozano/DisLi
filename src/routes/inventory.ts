@@ -25,7 +25,7 @@ router.get("/checkouts", person_logic.view_all_checkout);
 
 router.get("/approve", person_logic.approve_checkout);
 
-router.get("/add", inventory_logic.add_item_page);
+router.get("/add", inventory_logic.view_add_item);
 
 router.post("/add", inventory_logic.add_item);
 
