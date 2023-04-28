@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response } from "express";
 import { Item } from "../entity/item";
 import { replaceAll } from "../utils/replaceAll";
-import create_inventory_view from "../view/view_inventory";
-import create_inventory_item_view from "../view/view_inventory_item";
+import create_inventory_view from "../view/inventory/view_inventory";
+import create_inventory_item_view from "../view/inventory/view_inventory_item";
 
 const view_inventory = async (
   _req: Request,

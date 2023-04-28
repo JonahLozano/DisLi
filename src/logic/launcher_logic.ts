@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
-import create_launcher_admin_view from "../view/view_launcher_admin";
-import create_launcher_student_view from "../view/view_launcher_student";
+import create_launcher_admin_view from "../view/launcher/view_launcher_admin";
+import create_launcher_student_view from "../view/launcher/view_launcher_student";
 
 const view_launcher_admin = async (
   _req: Request,

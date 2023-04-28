@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import create_tech_support_view from "../view/view_tech_support";
+import create_tech_support_view from "../view/tech_support/view_tech_support";
 
 const view_tech_support = async (
   _req: Request,

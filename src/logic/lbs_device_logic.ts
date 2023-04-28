@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import create_lbs_device_view from "../view/view_lbs_device";
+import create_lbs_device_view from "../view/lbs_device/view_lbs_device";
 
 const view_lbs_device_form = async (
   _req: Request,

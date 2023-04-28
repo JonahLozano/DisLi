@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { Item } from "../entity/item";
-import create_stat_view from "../view/view_stats";
+import create_stat_view from "../view/stats/view_stats";
 import { DeviceStatus } from "../utils/DeviceStatus";
 
 const view_stats = async (_req: Request, res: Response, next: NextFunction) => {

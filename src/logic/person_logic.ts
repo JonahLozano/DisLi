@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
-import create_profile_view from "../view/view_profile";
-import create_profile_checkout_view from "../view/view_profile_checkout";
+import create_profile_view from "../view/profile/view_profile";
+import create_profile_checkout_view from "../view/profile/view_profile_checkout";
 import { Person } from "../entity/person";
 import { Item } from "../entity/item";
 import { DeviceStatus } from "../utils/DeviceStatus";
