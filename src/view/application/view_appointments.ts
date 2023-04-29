@@ -96,19 +96,19 @@ export = class create_appointments_view {
     this.data.content[3].content.push({
       id: `${idx}`,
       elementType: "blockHeading",
-      heading: `${idx}`,
+      heading: `Appointment #${idx}`,
       headingLevel: 2,
       description: `<span>User ID: ${university_id}</span><br><span>Item: ${item}</span><br><span>Check Out Date: ${checkout_date}</span><br>Return Date: ${return_date}`,
       buttons: [
         {
           elementType: "formButton",
-          title: "Accept Application",
+          title: "Accept Appointment",
           icon: "confirm",
           buttonType: "submit",
           actionStyle: "constructive",
           iconPosition: "iconOnly",
           confirmationMessage:
-            "Are you sure you want to accept this application?",
+            "Are you sure you want to accept this appointment?",
           events: [
             {
               eventName: "click",
@@ -126,37 +126,13 @@ export = class create_appointments_view {
         },
         {
           elementType: "formButton",
-          title: "decline",
+          title: "Decline Appointment",
           icon: "deny",
           buttonType: "submit",
           actionStyle: "destructive",
           iconPosition: "iconOnly",
           confirmationMessage:
-            "Are you sure you want to decline this application?",
-          events: [
-            {
-              eventName: "click",
-              action: "ajaxUpdate",
-              useRelativePathToUpdate: true,
-              targetId: `${idx}`,
-              ajaxRelativePath: "/",
-              requestMethod: "put",
-              postData: {
-                application_id: `${application_id}`,
-                deprecated: true,
-              },
-            },
-          ],
-        },
-        {
-          elementType: "formButton",
-          title: "delete",
-          icon: "delete",
-          buttonType: "submit",
-          actionStyle: "destructive",
-          iconPosition: "iconOnly",
-          confirmationMessage:
-            "Are you sure you want to delete this application?",
+            "Are you sure you want to decline this appointment?",
           events: [
             {
               eventName: "click",
