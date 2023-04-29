@@ -83,12 +83,10 @@ const checkout_item = async (
 ) => {
   try {
     // get data from request that shows what item is being attempted to be checked out
-    const { brand, model, code_name, checkout_date, checkout_time } = req.body;
-    console.log(req.body);
+    let { brand, model, code_name, checkout_date, checkout_time } = req.body;
 
     // find user by university_id, in this case it is hardcoded; normally sent in jwt
     const university_id = "0000-0000-0000-0001";
-    // find person object
     const person_details = await Person.findOneBy({ university_id });
 
     // find device object
@@ -99,19 +97,16 @@ const checkout_item = async (
       status: DeviceStatus.AVAILIABLE,
     });
 
-    // creating return date and return time (appointment_time)
-    const return_date = new Date(checkout_date);
+    // create the return date from the given checkout date
+    let return_date = new Date(checkout_date);
     return_date.setMonth(return_date.getMonth() + 6);
 
-    const mill2hrsNmins = (milliseconds: number) => {
-      const hours = Math.floor(milliseconds / (60 * 60 * 1000));
-      const minutes = Math.floor(milliseconds / (60 * 1000)) % 60;
-      return { hours, minutes };
-    };
+    // separating the hours and minutes from the checkout time
+    const hours = checkout_time.slice(0, 2);
+    const minutes = checkout_time.slice(3, 5);
 
-    const { hours, minutes } = mill2hrsNmins(checkout_time);
-
-    const appointment_time = new Date(checkout_date);
+    // create the appointment date time using checkout date and checkout time
+    let appointment_time = new Date(checkout_date);
     appointment_time.setHours(hours);
     appointment_time.setMinutes(minutes);
 
@@ -122,7 +117,6 @@ const checkout_item = async (
       return_date,
       checkout_date: appointment_time,
     });
-    console.log(checkout_details);
 
     // insert checkout object
     await Checkout.insert(checkout_details);
