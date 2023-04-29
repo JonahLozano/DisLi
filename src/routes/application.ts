@@ -35,6 +35,6 @@ router.get("/:id", application_logic.view_application);
 
 router.post("/", application_logic.add_application);
 
-router.put("/", application_logic.deicide_on_application);
+router.put("/", application_logic.decide_on_application);
 
 export = router;
