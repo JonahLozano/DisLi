@@ -21,16 +21,38 @@ const handle_lbs_device_form_submit = async (
   next: NextFunction
 ) => {
   try {
-    const { first_name, last_name, email } = req.body;
-    //const { first_name, last_name, email, phone, code_name, device_status, incident_location, is_usable, damage_description, incident_date } = req.body;
-    //const obj = JSON.parse(req.body);
+    const {
+      first_name,
+      last_name,
+      email,
+      phone,
+      code_name,
+      device_status,
+      incident_location,
+      is_usable,
+      damage_description,
+      incident_date,
+    } = req.body;
 
-    // write to directory
+    const obj = {
+      first_name,
+      last_name,
+      email,
+      phone,
+      code_name,
+      device_status,
+      incident_location,
+      is_usable,
+      damage_description,
+      incident_date,
+    };
+
+    // write to data directory
     await fs.writeFile(
-      `../data/${email}-${first_name}-${last_name}.json`,
-      JSON.stringify(req.body)
+      `../data/${first_name}-${last_name}.json`,
+      JSON.stringify(obj)
     );
-    res.status(200).json({});
+    res.status(201).json({});
   } catch (err) {
     next(err);
   }
