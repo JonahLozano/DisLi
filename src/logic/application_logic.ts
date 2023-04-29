@@ -62,6 +62,7 @@ const add_application = async (
 };
 
 // function to accept or decline an application
+/*
 const decide_on_application = async (
   req: Request,
   res: Response,
@@ -70,25 +71,26 @@ const decide_on_application = async (
   try {
     //const { application_id, decision } = req.body;
 
-    /* NEW CODE
+    // NEW CODE
     // instead find the application by application id
     const program_details = await Application.update(
       { application_id },
       { status: decision }
-    )*/
+    )
 
     res.status(200).json({});
 
-    /* OLD CODE
+    // OLD CODE
     const program_details = await Application.update(
       { brand, model, university_id },
       { status: decision }
     );
-    */
+    
   } catch (err) {
     next(err);
   }
 };
+*/
 
 const view_appointments = async (
   _req: Request,
@@ -136,6 +138,6 @@ export = {
   view_all_applications,
   view_application,
   add_application,
-  decide_on_application,
+  //decide_on_application,
   view_appointments,
 };
