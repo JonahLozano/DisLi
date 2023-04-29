@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import create_lbs_device_view from "../view/lbs_device/view_lbs_device";
-const fs = require("fs/promises"); // file system with Promises
+import fs from "fs/promises"; // file system with Promises
 
 const view_lbs_device_form = async (
   _req: Request,
