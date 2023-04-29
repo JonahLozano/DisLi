@@ -145,11 +145,11 @@ export = class create_inventory_view {
         status == "availiable"
           ? "style='color:green;font-size:1.0025rem'"
           : "style='color:red;font-size:1.0025rem'"
-      }>${status}</span><span style='font-size:1.0025rem'> - ${brand} ${model}</span><br></br>${code_name}`,
+      }>${status}</span><span style='font-size:1.0025rem'> : ${brand} - ${model}</span><br></br>${code_name}`,
       buttons: [
         {
           elementType: "linkButton",
-          title: "information",
+          title: "More Details",
           accessoryIcon: "notification_information",
           actionStyle: "normal",
           accessoryIconPosition: "iconOnly",
@@ -159,12 +159,12 @@ export = class create_inventory_view {
         },
         {
           elementType: "formButton",
-          title: "delete",
+          title: `Delete ${brand} - ${model}`,
           icon: "delete",
           buttonType: "submit",
           actionStyle: "destructive",
           iconPosition: "iconOnly",
-          confirmationMessage: "Are you sure you want to delete this?",
+          confirmationMessage: `Are you sure you want to delete ${brand} - ${model}?`,
           events: [
             {
               eventName: "click",

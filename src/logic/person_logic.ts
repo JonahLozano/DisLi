@@ -97,10 +97,6 @@ const checkout_item = async (
       status: DeviceStatus.AVAILIABLE,
     });
 
-    // create the return date from the given checkout date
-    let return_date = new Date(checkout_date);
-    return_date.setMonth(return_date.getMonth() + 6);
-
     // separating the hours and minutes from the checkout time
     const hours = checkout_time.slice(0, 2);
     const minutes = checkout_time.slice(3, 5);
@@ -109,6 +105,10 @@ const checkout_item = async (
     let appointment_time = new Date(checkout_date);
     appointment_time.setHours(hours);
     appointment_time.setMinutes(minutes);
+
+    // create the return date from the given appointment date time
+    let return_date = new Date(appointment_time);
+    return_date.setMonth(return_date.getMonth() + 6);
 
     // create checkout object with person_id and device_id
     const checkout_details = Checkout.create({
