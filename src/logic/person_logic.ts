@@ -127,8 +127,46 @@ const checkout_item = async (
       { status: DeviceStatus.RESERVED }
     );
 
-    // return checkout object
-    res.status(200).json({});
+    // REDIRECT USER TO PROFILE PAGE //
+    // code taken from view_person function //
+    const profile_page = new create_profile_view();
+
+    const appointments = await Person.createQueryBuilder("person")
+      .innerJoinAndSelect("person.checkout", "checkout")
+      .innerJoinAndSelect("checkout.item", "item")
+      .where("person.university_id = :university_id", {
+        university_id: person_details!.university_id,
+      })
+      .andWhere("item.status = :status", {
+        status: DeviceStatus.RESERVED,
+      })
+      .getOne();
+
+    const myDevices = await Person.createQueryBuilder("person")
+      .innerJoinAndSelect("person.checkout", "checkout")
+      .innerJoinAndSelect("checkout.item", "item")
+      .where("person.university_id = :university_id", {
+        university_id: person_details!.university_id,
+      })
+      .andWhere("item.status = :status", {
+        status: DeviceStatus.CHECKEDOUT,
+      })
+      .getOne();
+
+    appointments?.checkout.forEach((checkout, idx) => {
+      const checkout_date = checkout.checkout_date;
+      const university_id = appointments.university_id;
+
+      profile_page.addTableRow(idx + 1, university_id, checkout_date);
+    });
+
+    myDevices?.checkout.forEach((checkout) => {
+      const { return_date } = checkout;
+      const { brand, model, code_name } = checkout.item;
+      profile_page.addCardItem(brand, model, code_name, return_date);
+    });
+
+    res.status(200).json(profile_page.getData());
   } catch (err) {
     next(err);
   }
