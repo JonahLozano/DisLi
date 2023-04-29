@@ -101,9 +101,14 @@ export = class create_profile_checkout_view {
               required: true,
             },
             {
-              elementType: "formInputText",
+              elementType: "formInputSegmented",
               name: "code_name",
               label: "Code Name",
+              options: {
+                IPad: "IPad",
+                Hotspot: "Hotspot",
+              },
+              fullWidth: true,
               required: true,
             },
             {

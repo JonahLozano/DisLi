@@ -82,6 +82,7 @@ export = class create_add_inventory_item_view {
               name: "serial_number",
               label: "Serial Number",
               required: true,
+              placeholder: "0000-0000-0000",
             },
             {
               elementType: "formInputSegmented",
@@ -107,9 +108,14 @@ export = class create_add_inventory_item_view {
               required: true,
             },
             {
-              elementType: "formInputText",
+              elementType: "formInputSegmented",
               name: "code_name",
               label: "Code Name",
+              options: {
+                IPad: "IPad",
+                Hotspot: "Hotspot",
+              },
+              fullWidth: true,
               required: true,
             },
           ],
