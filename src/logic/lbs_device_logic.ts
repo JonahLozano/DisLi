@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import create_lbs_device_view from "../view/lbs_device/view_lbs_device";
+const fs = require("fs/promises"); // file system with Promises
 
 const view_lbs_device_form = async (
   _req: Request,
@@ -20,8 +21,15 @@ const handle_lbs_device_form_submit = async (
   next: NextFunction
 ) => {
   try {
-    console.log(req.body);
-    //const { first_name, last_name, email, phone, code_name, device_status, incident_location, is_usable, damage_description, incident_date, device_photo } = req.body;
+    const { first_name, last_name, email } = req.body;
+    //const { first_name, last_name, email, phone, code_name, device_status, incident_location, is_usable, damage_description, incident_date } = req.body;
+    //const obj = JSON.parse(req.body);
+
+    // write to directory
+    await fs.writeFile(
+      `../data/${email}-${first_name}-${last_name}.json`,
+      JSON.stringify(req.body)
+    );
     res.status(200).json({});
   } catch (err) {
     next(err);

@@ -162,15 +162,6 @@ export = class create_lbs_device_view {
               min: "2020-01-01",
               required: true,
             },
-            {
-              elementType: "formInputPhotoUpload",
-              name: "device_photo",
-              label: "Please upload a photo of the DAMAGED device",
-              description: "JPG, PNG, GIF, or SVG. Max file size: 5MB",
-              maxFileSize: "5MB",
-              notValidMessage: "This is not a supported image type",
-              capture: "anyCamera",
-            },
           ],
           buttons: [
             {
