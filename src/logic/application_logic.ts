@@ -61,6 +61,19 @@ const delete_applications = async (
   }
 };
 
+const display_applications = async (
+  _req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const program = await Application.findBy({});
+    res.status(200).json({ program });
+  } catch (err) {
+    next(err);
+  }
+};
+
 /*
 const view_application = async (
   req: Request,
@@ -153,6 +166,7 @@ const decide_on_application = async (
 export = {
   view_appointments,
   delete_applications,
+  display_applications,
   //view_application,
   //view_all_applications,
   //add_application,
