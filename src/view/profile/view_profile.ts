@@ -111,7 +111,8 @@ export = class create_profile_view {
           elementType: "container",
           backgroundColor: "navy",
           margin: "none",
-          padding: "medium",
+          paddingTop: "none",
+          paddingBottom: "tight",
           content: [
             {
               elementType: "blockHeading",
@@ -119,51 +120,6 @@ export = class create_profile_view {
               headingTextColor: "white",
               headingTextAlignment: "center",
               headingLevel: 2,
-            },
-            {
-              elementType: "table",
-              id: "appointmentsTable",
-              columnHeaders: true,
-              outerBorderWidth: "2px",
-              rowBorderWidth: "2px",
-              columnBorderWidth: "2px",
-              outerBorderColor: "white",
-              rowBorderColor: "white",
-              columnBorderColor: "white",
-              colHeaderTextColor: "white",
-              rowHeaderTextColor: "white",
-              titleTextColor: "white",
-              paddingTop: "none",
-              paddingBottom: "xtight",
-              columnOptions: [
-                {
-                  horizontalAlign: "center",
-                  verticalAlign: "middle",
-                },
-                {
-                  horizontalAlign: "center",
-                  verticalAlign: "middle",
-                },
-                {
-                  horizontalAlign: "center",
-                  verticalAlign: "middle",
-                },
-              ],
-              rows: [
-                {
-                  cells: [
-                    {
-                      title: "#",
-                    },
-                    {
-                      title: "Name",
-                    },
-                    {
-                      title: "Date / Time",
-                    },
-                  ],
-                },
-              ],
             },
           ],
         },
@@ -175,7 +131,8 @@ export = class create_profile_view {
           elementType: "container",
           backgroundColor: "navy",
           margin: "none",
-          padding: "medium",
+          paddingTop: "none",
+          paddingBottom: "tight",
           content: [
             {
               elementType: "blockHeading",
@@ -183,15 +140,6 @@ export = class create_profile_view {
               headingTextColor: "white",
               headingTextAlignment: "center",
               headingLevel: 2,
-            },
-            {
-              elementType: "cardSet",
-              id: "imageStyle_thumbnailSmall",
-              marginTop: "medium",
-              borderColor: "navy",
-              borderWidth: "2px",
-              marginBottom: "medium",
-              items: [],
             },
           ],
         },
@@ -201,6 +149,66 @@ export = class create_profile_view {
 
   getData() {
     return this.data;
+  }
+
+  // Table Functions //
+
+  addTableSubheader() {
+    this.data.content[5].content.push({
+      elementType: "blockHeading",
+      heading: "No Appointments Scheduled.",
+      headingTextColor: "white",
+      headingTextAlignment: "center",
+      headingLevel: 3,
+    });
+  }
+
+  addTable() {
+    this.data.content[5].content.push({
+      elementType: "table",
+      id: "appointmentsTable",
+      columnHeaders: true,
+      outerBorderWidth: "2px",
+      rowBorderWidth: "2px",
+      columnBorderWidth: "2px",
+      outerBorderColor: "white",
+      rowBorderColor: "white",
+      columnBorderColor: "white",
+      colHeaderTextColor: "white",
+      rowHeaderTextColor: "white",
+      titleTextColor: "white",
+      paddingTop: "none",
+      paddingBottom: "xtight",
+      columnOptions: [
+        {
+          horizontalAlign: "center",
+          verticalAlign: "middle",
+        },
+        {
+          horizontalAlign: "center",
+          verticalAlign: "middle",
+        },
+        {
+          horizontalAlign: "center",
+          verticalAlign: "middle",
+        },
+      ],
+      rows: [
+        {
+          cells: [
+            {
+              title: "#",
+            },
+            {
+              title: "Name",
+            },
+            {
+              title: "Date / Time",
+            },
+          ],
+        },
+      ],
+    });
   }
 
   addTableRow(idx: number, university_id: string, checkout_date: Date) {
@@ -216,6 +224,30 @@ export = class create_profile_view {
           title: `${checkout_date.toLocaleDateString()} ${checkout_date.toLocaleTimeString()}`,
         },
       ],
+    });
+  }
+
+  // Card Functions //
+
+  addCardSubheader() {
+    this.data.content[7].content.push({
+      elementType: "blockHeading",
+      heading: "No Devices Registered.",
+      headingTextColor: "white",
+      headingTextAlignment: "center",
+      headingLevel: 3,
+    });
+  }
+
+  addCard() {
+    this.data.content[7].content.push({
+      elementType: "cardSet",
+      id: "imageStyle_thumbnailSmall",
+      marginTop: "medium",
+      borderColor: "navy",
+      borderWidth: "2px",
+      marginBottom: "medium",
+      items: [],
     });
   }
 
