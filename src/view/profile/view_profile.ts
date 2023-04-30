@@ -113,6 +113,8 @@ export = class create_profile_view {
           margin: "none",
           paddingTop: "none",
           paddingBottom: "tight",
+          paddingLeft: "tight",
+          paddingRight: "tight",
           content: [
             {
               elementType: "blockHeading",
@@ -133,6 +135,8 @@ export = class create_profile_view {
           margin: "none",
           paddingTop: "none",
           paddingBottom: "tight",
+          paddingLeft: "tight",
+          paddingRight: "tight",
           content: [
             {
               elementType: "blockHeading",

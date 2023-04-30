@@ -167,18 +167,32 @@ const checkout_item = async (
       })
       .getOne();
 
-    appointments?.checkout.forEach((checkout, idx) => {
-      const checkout_date = checkout.checkout_date;
-      const university_id = appointments.university_id;
+    // checking if there are appointments
+    if (!appointments) {
+      profile_page.addTableSubheader();
+    } else {
+      profile_page.addTable();
 
-      profile_page.addTableRow(idx + 1, university_id, checkout_date);
-    });
+      appointments?.checkout.forEach((checkout, idx) => {
+        const checkout_date = checkout.checkout_date;
+        const university_id = appointments.university_id;
 
-    myDevices?.checkout.forEach((checkout) => {
-      const { return_date } = checkout;
-      const { brand, model, code_name } = checkout.item;
-      profile_page.addCardItem(brand, model, code_name, return_date);
-    });
+        profile_page.addTableRow(idx + 1, university_id, checkout_date);
+      });
+    }
+
+    // checking if there are devices
+    if (!myDevices) {
+      profile_page.addCardSubheader();
+    } else {
+      profile_page.addCard();
+
+      myDevices?.checkout.forEach((checkout) => {
+        const { return_date } = checkout;
+        const { brand, model, code_name } = checkout.item;
+        profile_page.addCardItem(brand, model, code_name, return_date);
+      });
+    }
 
     res.status(200).json(profile_page.getData());
   } catch (err) {
