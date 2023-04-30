@@ -5,16 +5,6 @@ import create_inventory_view from "../view/inventory/view_inventory";
 import create_inventory_item_view from "../view/inventory/view_inventory_item";
 import create_add_inventory_item_view from "../view/inventory/view_add_inventory_item";
 
-const delete_all = async (_req: Request, res: Response, next: NextFunction) => {
-  try {
-    const items = await Item.find({});
-    await Item.remove(items);
-    res.status(200).json({});
-  } catch (err) {
-    next(err);
-  }
-};
-
 const view_inventory = async (
   _req: Request,
   res: Response,
@@ -193,7 +183,6 @@ const search_item = async (req: Request, res: Response, next: NextFunction) => {
 };
 
 export = {
-  delete_all,
   search_item,
   report_item,
   view_inventory,

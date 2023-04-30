@@ -17,8 +17,6 @@ import person_logic = require("../logic/person_logic");
 
 // router.put("/", authorize_page([UserRole.ADMIN]), inventory_logic.modify_item);
 
-router.get("/delete_all", inventory_logic.delete_all);
-
 router.get("/", inventory_logic.view_inventory);
 
 router.get("/add", inventory_logic.view_add_item);
