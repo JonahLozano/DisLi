@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { Application } from "../entity/application";
 import { Person } from "../entity/person";
-import { Item } from "../entity/item";
+//import { Item } from "../entity/item";
 import create_appointments_view from "../view/application/view_appointments";
 import { DeviceStatus } from "../utils/DeviceStatus";
 
