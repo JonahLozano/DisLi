@@ -29,11 +29,13 @@ import application_logic = require("../logic/application_logic");
 // );
 router.get("/appointments", application_logic.view_appointments);
 
-router.get("/", application_logic.view_all_applications);
+router.get("/appointments/delete", application_logic.delete_applications);
 
-router.get("/:id", application_logic.view_application);
+//router.get("/", application_logic.view_all_applications);
 
-router.post("/", application_logic.add_application);
+//router.get("/:id", application_logic.view_application);
+
+//router.post("/", application_logic.add_application);
 
 // uncomment when functionality complete
 //router.put("/", application_logic.decide_on_application);
