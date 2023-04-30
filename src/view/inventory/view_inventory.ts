@@ -134,7 +134,7 @@ export = class create_inventory_view {
   addSubheader() {
     this.data.content[4].content.push({
       elementType: "blockHeading",
-      heading: "No Items in Inventory.",
+      heading: "No Items Available.",
       headingTextAlignment: "center",
       headingLevel: 2,
     });
