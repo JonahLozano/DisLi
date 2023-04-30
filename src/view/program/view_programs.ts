@@ -91,7 +91,11 @@ export = class create_programs_view {
         {
           id: "programs_container",
           elementType: "container",
-          content: [],
+          content: [
+            {
+              elementType: "divider",
+            },
+          ],
         },
       ],
     };
@@ -104,6 +108,15 @@ export = class create_programs_view {
   addDivider() {
     this.data.content[4].content.push({
       elementType: "divider",
+    });
+  }
+
+  addSubheader() {
+    this.data.content[4].content.push({
+      elementType: "blockHeading",
+      heading: "No Programs Available.",
+      headingTextAlignment: "center",
+      headingLevel: 2,
     });
   }
 

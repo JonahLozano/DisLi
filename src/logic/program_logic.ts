@@ -10,20 +10,22 @@ const view_programs = async (
 ) => {
   try {
     // get all programs in db
-    const item_details = await Program.findBy({});
+    const programs = await Program.findBy({});
 
+    // create the initial program view
     const view = new create_programs_view();
-
-    view.addDivider();
 
     let counter = 1;
 
-    if (item_details)
-      item_details.forEach((ele) => {
+    if (programs) {
+      programs.forEach((ele) => {
         view.addProgram(counter, ele.code_name, ele.availiable_to);
         counter++;
         view.addDivider();
       });
+    } else {
+      view.addSubheader();
+    }
 
     res.status(200).json(view.getData());
   } catch (err) {
@@ -54,23 +56,23 @@ const add_program = async (req: Request, res: Response, next: NextFunction) => {
     });
 
     await Program.insert(new_device);
-    //res.status(201).json(new_device);
 
     // redirect to view updated programs page
-    const item_details = await Program.findBy({});
+    const programs = await Program.findBy({});
 
     const view = new create_programs_view();
 
-    view.addDivider();
-
     let counter = 1;
 
-    if (item_details)
-      item_details.forEach((ele) => {
+    if (programs) {
+      programs.forEach((ele) => {
         view.addProgram(counter, ele.code_name, ele.availiable_to);
         counter++;
         view.addDivider();
       });
+    } else {
+      view.addSubheader();
+    }
 
     res.status(200).json(view.getData());
   } catch (err) {
@@ -89,23 +91,23 @@ const delete_program = async (
     const program = await Program.findBy({ code_name, availiable_to });
 
     await Program.remove(program);
-    //res.status(200).json(program);
 
     // redirect to view updated programs page
-    const item_details = await Program.findBy({});
+    const programs = await Program.findBy({});
 
     const view = new create_programs_view();
 
-    view.addDivider();
-
     let counter = 1;
 
-    if (item_details)
-      item_details.forEach((ele) => {
+    if (programs) {
+      programs.forEach((ele) => {
         view.addProgram(counter, ele.code_name, ele.availiable_to);
         counter++;
         view.addDivider();
       });
+    } else {
+      view.addSubheader();
+    }
 
     res.status(200).json(view.getData());
   } catch (err) {
