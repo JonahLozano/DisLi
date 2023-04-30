@@ -18,9 +18,9 @@ const view_inventory = async (
 
     let inv = new create_inventory_view();
 
-    inv.addDivider();
-
-    if (item_details) {
+    if (item_details.length === 0) {
+      inv.addSubheader();
+    } else {
       item_details.forEach((ele) => {
         const anID = replaceAll(ele.serial_number, "-", "");
 
@@ -35,8 +35,6 @@ const view_inventory = async (
 
         inv.addDivider();
       });
-    } else {
-      inv.addSubheader();
     }
 
     res.status(200).json(inv.getData());

@@ -111,7 +111,11 @@ export = class create_inventory_view {
         {
           elementType: "container",
           id: "custom_styling",
-          content: [],
+          content: [
+            {
+              elementType: "divider",
+            },
+          ],
         },
       ],
     };
