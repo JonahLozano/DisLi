@@ -43,19 +43,6 @@ const view_inventory = async (
   }
 };
 
-const view_add_item = async (
-  _req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  try {
-    const page = new create_add_inventory_item_view();
-    res.status(200).json(page.getData());
-  } catch (err) {
-    next(err);
-  }
-};
-
 const view_item = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const serial_number = req.params.id;
@@ -78,26 +65,14 @@ const view_item = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-// Add a modify item function
-const modify_item = async (req: Request, res: Response, next: NextFunction) => {
+const view_add_item = async (
+  _req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
-    const serial_number = req.body.serial_number;
-
-    const existing_item = await Item.findOneByOrFail({ serial_number });
-
-    const { brand, model, code_name, status, deprecated } = req.body;
-
-    Object.assign(existing_item, {
-      brand,
-      model,
-      code_name,
-      status,
-      deprecated,
-    });
-
-    await Item.update({ serial_number }, existing_item);
-
-    res.status(201).json(existing_item);
+    const page = new create_add_inventory_item_view();
+    res.status(200).json(page.getData());
   } catch (err) {
     next(err);
   }
@@ -148,6 +123,31 @@ const add_item = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
+// Add a modify item function
+const modify_item = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const serial_number = req.body.serial_number;
+
+    const existing_item = await Item.findOneByOrFail({ serial_number });
+
+    const { brand, model, code_name, status, deprecated } = req.body;
+
+    Object.assign(existing_item, {
+      brand,
+      model,
+      code_name,
+      status,
+      deprecated,
+    });
+
+    await Item.update({ serial_number }, existing_item);
+
+    res.status(201).json(existing_item);
+  } catch (err) {
+    next(err);
+  }
+};
+
 // add report item as stolen/lost
 const report_item = async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -181,11 +181,11 @@ const search_item = async (req: Request, res: Response, next: NextFunction) => {
 };
 
 export = {
-  search_item,
-  report_item,
   view_inventory,
   view_item,
+  view_add_item,
   add_item,
   modify_item,
-  view_add_item,
+  report_item,
+  search_item,
 };
