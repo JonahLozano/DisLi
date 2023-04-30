@@ -5,6 +5,16 @@ import create_inventory_view from "../view/inventory/view_inventory";
 import create_inventory_item_view from "../view/inventory/view_inventory_item";
 import create_add_inventory_item_view from "../view/inventory/view_add_inventory_item";
 
+const delete_all = async (_req: Request, res: Response, next: NextFunction) => {
+  try {
+    const items = await Item.find({});
+    await Item.remove(items);
+    res.status(200).json({});
+  } catch (err) {
+    next(err);
+  }
+};
+
 const view_inventory = async (
   _req: Request,
   res: Response,
@@ -20,22 +30,39 @@ const view_inventory = async (
 
     inv.addDivider();
 
-    item_details.forEach((ele) => {
-      const anID = replaceAll(ele.serial_number, "-", "");
+    if (item_details) {
+      item_details.forEach((ele) => {
+        const anID = replaceAll(ele.serial_number, "-", "");
 
-      inv.addItem(
-        anID,
-        ele.serial_number,
-        ele.status,
-        ele.brand,
-        ele.model,
-        ele.code_name
-      );
+        inv.addItem(
+          anID,
+          ele.serial_number,
+          ele.status,
+          ele.brand,
+          ele.model,
+          ele.code_name
+        );
 
-      inv.addDivider();
-    });
+        inv.addDivider();
+      });
+    } else {
+      inv.addSubheader();
+    }
 
     res.status(200).json(inv.getData());
+  } catch (err) {
+    next(err);
+  }
+};
+
+const view_add_item = async (
+  _req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const page = new create_add_inventory_item_view();
+    res.status(200).json(page.getData());
   } catch (err) {
     next(err);
   }
@@ -63,14 +90,26 @@ const view_item = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-const view_add_item = async (
-  _req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+// Add a modify item function
+const modify_item = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const page = new create_add_inventory_item_view();
-    res.status(200).json(page.getData());
+    const serial_number = req.body.serial_number;
+
+    const existing_item = await Item.findOneByOrFail({ serial_number });
+
+    const { brand, model, code_name, status, deprecated } = req.body;
+
+    Object.assign(existing_item, {
+      brand,
+      model,
+      code_name,
+      status,
+      deprecated,
+    });
+
+    await Item.update({ serial_number }, existing_item);
+
+    res.status(201).json(existing_item);
   } catch (err) {
     next(err);
   }
@@ -121,31 +160,6 @@ const add_item = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-// Add a modify item function
-const modify_item = async (req: Request, res: Response, next: NextFunction) => {
-  try {
-    const serial_number = req.body.serial_number;
-
-    const existing_item = await Item.findOneByOrFail({ serial_number });
-
-    const { brand, model, code_name, status, deprecated } = req.body;
-
-    Object.assign(existing_item, {
-      brand,
-      model,
-      code_name,
-      status,
-      deprecated,
-    });
-
-    await Item.update({ serial_number }, existing_item);
-
-    res.status(201).json(existing_item);
-  } catch (err) {
-    next(err);
-  }
-};
-
 // add report item as stolen/lost
 const report_item = async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -179,6 +193,7 @@ const search_item = async (req: Request, res: Response, next: NextFunction) => {
 };
 
 export = {
+  delete_all,
   search_item,
   report_item,
   view_inventory,

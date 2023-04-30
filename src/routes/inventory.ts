@@ -17,6 +17,16 @@ import person_logic = require("../logic/person_logic");
 
 // router.put("/", authorize_page([UserRole.ADMIN]), inventory_logic.modify_item);
 
+router.get("/delete_all", inventory_logic.delete_all);
+
+router.get("/", inventory_logic.view_inventory);
+
+router.get("/add", inventory_logic.view_add_item);
+
+router.get("/:id", inventory_logic.view_item);
+
+router.put("/", inventory_logic.modify_item);
+
 router.get("/search", inventory_logic.search_item);
 
 router.get("/report", inventory_logic.report_item);
@@ -25,14 +35,6 @@ router.get("/checkouts", person_logic.view_all_checkout);
 
 router.get("/approve", person_logic.approve_checkout);
 
-router.get("/add", inventory_logic.view_add_item);
-
 router.post("/add", inventory_logic.add_item);
-
-router.get("/", inventory_logic.view_inventory);
-
-router.get("/:id", inventory_logic.view_item);
-
-router.put("/", inventory_logic.modify_item);
 
 export = router;

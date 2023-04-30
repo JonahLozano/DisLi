@@ -127,6 +127,15 @@ export = class create_inventory_view {
     });
   }
 
+  addSubheader() {
+    this.data.content[4].content.push({
+      elementType: "blockHeading",
+      heading: "No Items in Inventory.",
+      headingTextAlignment: "center",
+      headingLevel: 2,
+    });
+  }
+
   addItem(
     id: string,
     serial_number: string,
