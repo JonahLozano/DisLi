@@ -17,14 +17,14 @@ const view_programs = async (
 
     let counter = 1;
 
-    if (programs) {
+    if (programs.length === 0) {
+      view.addSubheader();
+    } else {
       programs.forEach((ele) => {
         view.addProgram(counter, ele.code_name, ele.availiable_to);
         counter++;
         view.addDivider();
       });
-    } else {
-      view.addSubheader();
     }
 
     res.status(200).json(view.getData());
