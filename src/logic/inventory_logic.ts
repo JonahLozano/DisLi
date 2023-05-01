@@ -92,7 +92,7 @@ const add_item = async (req: Request, res: Response, next: NextFunction) => {
 
     await Item.insert(new_device);
 
-    // now display the inventory page
+    // now display the inventory page //
     const item_details = await Item.find({
       where: { deprecated: false },
       order: { created_at: "DESC" },
@@ -100,22 +100,24 @@ const add_item = async (req: Request, res: Response, next: NextFunction) => {
 
     let inv = new create_inventory_view();
 
-    inv.addDivider();
+    if (item_details.length === 0) {
+      inv.addSubheader();
+    } else {
+      item_details.forEach((ele) => {
+        const anID = replaceAll(ele.serial_number, "-", "");
 
-    item_details.forEach((ele) => {
-      const anID = replaceAll(ele.serial_number, "-", "");
+        inv.addItem(
+          anID,
+          ele.serial_number,
+          ele.status,
+          ele.brand,
+          ele.model,
+          ele.code_name
+        );
 
-      inv.addItem(
-        anID,
-        ele.serial_number,
-        ele.status,
-        ele.brand,
-        ele.model,
-        ele.code_name
-      );
-
-      inv.addDivider();
-    });
+        inv.addDivider();
+      });
+    }
 
     res.status(201).json(inv.getData());
   } catch (err) {
