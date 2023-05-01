@@ -69,7 +69,11 @@ export = class create_appointments_view {
         {
           elementType: "container",
           id: "appointments_container",
-          content: [],
+          content: [
+            {
+              elementType: "divider",
+            },
+          ],
         },
       ],
     };
@@ -82,6 +86,15 @@ export = class create_appointments_view {
   addDivider() {
     this.data.content[3].content.push({
       elementType: "divider",
+    });
+  }
+
+  addSubheader() {
+    this.data.content[3].content.push({
+      elementType: "blockHeading",
+      heading: "No Appointments Scheduled.",
+      headingTextAlignment: "center",
+      headingLevel: 2,
     });
   }
 

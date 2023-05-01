@@ -21,25 +21,31 @@ const view_appointments = async (
       })
       .getMany();
 
-    let appCnt = 1;
-    appointments.forEach((appointment) => {
-      appointment.checkout.forEach((checkout) => {
-        const checkout_date = checkout.checkout_date;
-        const university_id = appointment.university_id;
-        const application_id = checkout.id;
-        const item = checkout.item;
-        const return_date = checkout.return_date;
+    if (appointments.length === 0) {
+      admin_appointment_page.addSubheader();
+    } else {
+      let appCnt = 1;
+      appointments.forEach((appointment) => {
+        appointment.checkout.forEach((checkout) => {
+          const checkout_date = checkout.checkout_date;
+          const university_id = appointment.university_id;
+          const application_id = checkout.id;
+          const item = checkout.item;
+          const return_date = checkout.return_date;
 
-        admin_appointment_page.addAppointment(
-          appCnt++,
-          application_id,
-          university_id,
-          `${item.brand} - ${item.model}`,
-          checkout_date,
-          return_date
-        );
+          admin_appointment_page.addAppointment(
+            appCnt++,
+            application_id,
+            university_id,
+            `${item.brand} - ${item.model}`,
+            checkout_date,
+            return_date
+          );
+
+          admin_appointment_page.addDivider();
+        });
       });
-    });
+    }
 
     res.status(200).json(admin_appointment_page.getData());
   } catch (err) {
