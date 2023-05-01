@@ -102,14 +102,24 @@ export = class create_inventory_item_view {
         imageBorderWidth: "2px",
         imageBorderColor: "black",
         image: {
-          url: "https://i.ibb.co/G9LC6hK/devices.png",
+          url: `${
+            code_name === "IPad"
+              ? "https://i.ibb.co/ChrbvCZ/ipad.jpg"
+              : code_name === "Hotspot"
+              ? "https://i.ibb.co/SJTSgqn/att.png"
+              : "https://i.ibb.co/tXbJwXL/devices.png"
+          }`,
           alt: "Device Image",
           cropStyle: "fill",
         },
       },
       {
         elementType: "html",
-        html: `<p style="text-align: center;">Device Status: ${status}</p>`,
+        html: `<p style='text-align:center;'>Device Status: ${
+          status === "availiable"
+            ? `<span style="color:green;">${status}</span>`
+            : `<span style="color:red;">${status}</span>`
+        }</p>`,
       }
     );
   }
