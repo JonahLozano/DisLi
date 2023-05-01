@@ -5,13 +5,13 @@ import inventory_logic from "../logic/inventory_logic";
 // import { UserRole } from "../utils/UserRoles";
 //import person_logic = require("../logic/person_logic");
 
+router.get("/add-item", inventory_logic.view_add_item);
+
+router.post("/add", inventory_logic.add_item);
+
 router.get("/", inventory_logic.view_inventory);
 
 router.get("/:id", inventory_logic.view_item);
-
-router.get("/add", inventory_logic.view_add_item);
-
-router.post("/add", inventory_logic.add_item);
 
 router.put("/", inventory_logic.modify_item);
 
