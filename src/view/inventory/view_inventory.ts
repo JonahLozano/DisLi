@@ -75,7 +75,7 @@ export = class create_inventory_view {
               title: "Add Item",
               actionStyle: "constructive",
               link: {
-                relativePath: "../../inventory/add",
+                relativePath: "../../inventory/add-item",
               },
               marginBottom: "xtight",
               marginTop: "loose",

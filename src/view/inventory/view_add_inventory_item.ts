@@ -75,7 +75,7 @@ export = class create_add_inventory_item_view {
         {
           elementType: "form",
           id: "add_inventory_item_form",
-          relativePath: "../../inventory/add",
+          relativePath: "../../inventory/add-item",
           items: [
             {
               elementType: "formInputBarcode",
