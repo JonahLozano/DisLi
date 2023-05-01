@@ -148,7 +148,6 @@ const modify_item = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-/*
 // add report item as stolen/lost
 const report_item = async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -180,7 +179,6 @@ const search_item = async (req: Request, res: Response, next: NextFunction) => {
     next(err);
   }
 };
-*/
 
 export = {
   view_inventory,
@@ -188,8 +186,6 @@ export = {
   view_add_item,
   add_item,
   modify_item,
-  /*
   report_item,
   search_item,
-  */
 };

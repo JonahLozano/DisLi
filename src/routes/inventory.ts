@@ -3,7 +3,7 @@ const router = express.Router();
 // import authorize_page from "../middleware/authorize_page";
 // import { UserRole } from "../utils/UserRoles";
 import inventory_logic from "../logic/inventory_logic";
-//import person_logic = require("../logic/person_logic");
+import person_logic = require("../logic/person_logic");
 
 // router.get(
 //   "/",
@@ -21,13 +21,12 @@ router.get("/", inventory_logic.view_inventory);
 
 router.get("/:id", inventory_logic.view_item);
 
-router.get("/add-item", inventory_logic.view_add_item);
+router.get("/add", inventory_logic.view_add_item);
 
-router.post("/add-item", inventory_logic.add_item);
+router.post("/add", inventory_logic.add_item);
 
 router.put("/", inventory_logic.modify_item);
 
-/*
 router.get("/report", inventory_logic.report_item);
 
 router.get("/search", inventory_logic.search_item);
@@ -35,6 +34,5 @@ router.get("/search", inventory_logic.search_item);
 router.get("/checkouts", person_logic.view_all_checkout);
 
 router.get("/approve", person_logic.approve_checkout);
-*/
 
 export = router;
