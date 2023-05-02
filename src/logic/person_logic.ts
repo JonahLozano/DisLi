@@ -79,12 +79,8 @@ const view_checkout = async (
   next: NextFunction
 ) => {
   try {
-    // const university_id = "0000-0000-0000-0001";
-    // const person_details = await Person.findOneBy({ university_id });
-
-    const profile_page = new create_profile_checkout_view();
-
-    res.status(200).json(profile_page.getData());
+    const profile_checkout_page = new create_profile_checkout_view();
+    res.status(200).json(profile_checkout_page.getData());
   } catch (err) {
     next(err);
   }
@@ -142,7 +138,7 @@ const checkout_item = async (
     );
 
     // REDIRECT USER TO PROFILE PAGE //
-    // code taken from view_person function //
+    // (code taken from view_person function) //
     const profile_page = new create_profile_view();
 
     const appointments = await Person.createQueryBuilder("person")
@@ -175,9 +171,9 @@ const checkout_item = async (
 
       appointments?.checkout.forEach((checkout, idx) => {
         const checkout_date = checkout.checkout_date;
-        const university_id = appointments.university_id;
+        const device_type = checkout.item.code_name;
 
-        profile_page.addTableRow(idx + 1, university_id, checkout_date);
+        profile_page.addTableRow(idx + 1, device_type, checkout_date);
       });
     }
 
