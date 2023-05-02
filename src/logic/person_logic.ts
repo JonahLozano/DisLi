@@ -48,9 +48,9 @@ const view_person = async (
 
       appointments?.checkout.forEach((checkout, idx) => {
         const checkout_date = checkout.checkout_date;
-        const university_id = appointments.university_id;
+        const device_type = checkout.item.code_name;
 
-        profile_page.addTableRow(idx + 1, university_id, checkout_date);
+        profile_page.addTableRow(idx + 1, device_type, checkout_date);
       });
     }
 

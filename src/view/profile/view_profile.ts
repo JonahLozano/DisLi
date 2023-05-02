@@ -204,7 +204,7 @@ export = class create_profile_view {
               title: "#",
             },
             {
-              title: "Name",
+              title: "Device Type",
             },
             {
               title: "Date / Time",
@@ -215,14 +215,14 @@ export = class create_profile_view {
     });
   }
 
-  addTableRow(idx: number, university_id: string, checkout_date: Date) {
+  addTableRow(idx: number, code_name: string, checkout_date: Date) {
     this.data.content[5].content[1].rows.push({
       cells: [
         {
           title: `${idx}`,
         },
         {
-          title: `${university_id}`,
+          title: `${code_name}`,
         },
         {
           title: `${checkout_date.toLocaleDateString()} ${checkout_date.toLocaleTimeString()}`,

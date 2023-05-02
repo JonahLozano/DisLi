@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { Application } from "../entity/application";
 import { Person } from "../entity/person";
+import { Checkout } from "../entity/checkout";
 //import { Item } from "../entity/item";
 import create_appointments_view from "../view/application/view_appointments";
 import { DeviceStatus } from "../utils/DeviceStatus";
@@ -63,16 +64,18 @@ const decide_on_application = async (
     const { application_id, decision } = req.body;
 
     if (decision === "delete") {
-      const application = await Application.findBy({ id: application_id });
-      await Application.remove(application);
-      res.status(200).json({ application });
+      const checkout = await Checkout.findBy({ id: application_id });
+      await Checkout.remove(checkout);
+      res.status(200).json({ checkout });
       return;
     } else {
-      const application = await Application.update(
+      /*
+      const application = await Checkout.update(
         { id: application_id },
         { status: decision }
       );
-      res.status(200).json({ application });
+      */
+      res.status(200).json({});
       return;
     }
 

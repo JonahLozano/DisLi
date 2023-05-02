@@ -110,7 +110,7 @@ export = class create_add_inventory_item_view {
             {
               elementType: "formInputSegmented",
               name: "code_name",
-              label: "Code Name",
+              label: "Device Type",
               options: {
                 IPad: "IPad",
                 Hotspot: "Hotspot",

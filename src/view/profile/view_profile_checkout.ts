@@ -103,7 +103,7 @@ export = class create_profile_checkout_view {
             {
               elementType: "formInputSegmented",
               name: "code_name",
-              label: "Type ",
+              label: "Device Typfdsae",
               options: {
                 IPad: "IPad",
                 Hotspot: "Hotspot",
