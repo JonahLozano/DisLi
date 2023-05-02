@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import { Application } from "../entity/application";
 import { Person } from "../entity/person";
 import { Checkout } from "../entity/checkout";
-//import { Item } from "../entity/item";
+import { Item } from "../entity/item";
 import create_appointments_view from "../view/application/view_appointments";
 import { DeviceStatus } from "../utils/DeviceStatus";
 
@@ -39,6 +39,7 @@ const view_appointments = async (
             application_id,
             university_id,
             `${item.brand} - ${item.model}`,
+            item.serial_number,
             checkout_date,
             return_date
           );
@@ -61,12 +62,21 @@ const decide_on_application = async (
   next: NextFunction
 ) => {
   try {
-    const { application_id, decision } = req.body;
+    const { application_id, item_serial_number, decision } = req.body;
 
     if (decision === "delete") {
+      // delete the checkout
       const checkout = await Checkout.findBy({ id: application_id });
       await Checkout.remove(checkout);
-      res.status(200).json({ checkout });
+
+      // update the item status update to become available again
+      await Item.update(
+        { serial_number: item_serial_number },
+        { status: DeviceStatus.AVAILIABLE }
+      );
+
+      // return
+      res.status(200).json({});
       return;
     } else {
       /*
@@ -86,33 +96,6 @@ const decide_on_application = async (
       { status: decision }
     );
     */
-  } catch (err) {
-    next(err);
-  }
-};
-
-const delete_applications = async (
-  _req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  try {
-    const program = await Application.findBy({});
-    await Application.remove(program);
-    res.status(200).json({});
-  } catch (err) {
-    next(err);
-  }
-};
-
-const display_applications = async (
-  _req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  try {
-    const program = await Application.findBy({});
-    res.status(200).json({ program });
   } catch (err) {
     next(err);
   }
@@ -179,8 +162,6 @@ const add_application = async (
 export = {
   view_appointments,
   decide_on_application,
-  delete_applications,
-  display_applications,
   //view_application,
   //view_all_applications,
   //add_application,

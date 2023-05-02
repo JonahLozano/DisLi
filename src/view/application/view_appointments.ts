@@ -103,6 +103,7 @@ export = class create_appointments_view {
     application_id: string,
     university_id: string,
     item: string,
+    item_serial_number: string,
     checkout_date: Date,
     return_date: Date
   ) {
@@ -132,6 +133,7 @@ export = class create_appointments_view {
               requestMethod: "put",
               postData: {
                 application_id: `${application_id}`,
+                item_serial_number: `${item_serial_number}`,
                 decision: "approve",
               },
             },
@@ -156,6 +158,7 @@ export = class create_appointments_view {
               requestMethod: "put",
               postData: {
                 application_id: `${application_id}`,
+                item_serial_number: `${item_serial_number}`,
                 decision: "deny",
               },
             },
@@ -180,6 +183,7 @@ export = class create_appointments_view {
               requestMethod: "put",
               postData: {
                 application_id: `${application_id}`,
+                item_serial_number: `${item_serial_number}`,
                 decision: "delete",
               },
             },

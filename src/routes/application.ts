@@ -31,10 +31,6 @@ router.get("/appointments", application_logic.view_appointments);
 
 router.put("/decision", application_logic.decide_on_application);
 
-router.get("/appointments/delete", application_logic.delete_applications);
-
-router.get("/appointments/display", application_logic.display_applications);
-
 //router.get("/", application_logic.view_all_applications);
 
 //router.get("/:id", application_logic.view_application);
