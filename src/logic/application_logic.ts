@@ -53,6 +53,41 @@ const view_appointments = async (
   }
 };
 
+// function to accept, deny, or delete an application
+const decide_on_application = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { application_id, decision } = req.body;
+
+    if (decision === "delete") {
+      const application = await Application.findBy({ id: application_id });
+      await Application.remove(application);
+      res.status(200).json({ application });
+      return;
+    } else {
+      const application = await Application.update(
+        { id: application_id },
+        { status: decision }
+      );
+      res.status(200).json({ application });
+      return;
+    }
+
+    // OLD CODE
+    /*
+    const program_details = await Application.update(
+      { brand, model, university_id },
+      { status: decision }
+    );
+    */
+  } catch (err) {
+    next(err);
+  }
+};
+
 const delete_applications = async (
   _req: Request,
   res: Response,
@@ -138,43 +173,12 @@ const add_application = async (
 };
 */
 
-// function to accept or decline an application
-/*
-const decide_on_application = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  try {
-    //const { application_id, decision } = req.body;
-
-    // NEW CODE
-    // instead find the application by application id
-    const program_details = await Application.update(
-      { application_id },
-      { status: decision }
-    )
-
-    res.status(200).json({});
-
-    // OLD CODE
-    const program_details = await Application.update(
-      { brand, model, university_id },
-      { status: decision }
-    );
-    
-  } catch (err) {
-    next(err);
-  }
-};
-*/
-
 export = {
   view_appointments,
+  decide_on_application,
   delete_applications,
   display_applications,
   //view_application,
   //view_all_applications,
   //add_application,
-  //decide_on_application,
 };
